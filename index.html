@@ -422,20 +422,23 @@
       <!-- Quick Decrees Presets -->
       <div class="brutalist-card">
         <span class="sticky-tag rotate-right yellow" style="margin-bottom: 0.85rem;">
-          <i class="fa-solid fa-bullhorn"></i> QUICK DECREES
+          <i class="fa-solid fa-bullhorn"></i> GEN-Z DECREES
         </span>
         <div style="display: flex; flex-direction: column; gap: 0.45rem;">
-          <button class="btn-brutalist btn-mini quick-decree-btn" data-decree="Nominations protocol is now strictly in session!">
-            ⚠️ Start Nominations
+          <button class="btn-brutalist btn-mini quick-decree-btn" data-decree="Bro thinks he is the main character! Pack your bags, Elena! 💀">
+            💀 Bro Thinks He's Him
           </button>
-          <button class="btn-brutalist btn-mini quick-decree-btn" data-decree="Captain orders are absolute. Immediate luxury room raid!">
-            👑 Captain's Raid
+          <button class="btn-brutalist btn-mini quick-decree-btn" data-decree="Big Boss is standing on business! Luxury room raid starts NOW, no cap!">
+            💅 Stand On Business
           </button>
-          <button class="btn-brutalist btn-mini quick-decree-btn" data-decree="30 seconds remaining on countdown! Complete your stations!">
-            ⏱️ 30s Final Warning
+          <button class="btn-brutalist btn-mini quick-decree-btn" data-decree="Chat is this real?! Sussy baka detected in the pantry! Emergency meeting!">
+            🛸 Sussy Baka Alert
           </button>
-          <button class="btn-brutalist btn-mini quick-decree-btn" data-decree="Silence in the Tech House. Eviction verdict is arriving.">
-            ☠️ Eviction Silence
+          <button class="btn-brutalist btn-mini quick-decree-btn" data-decree="Vedesh is cooking with 540 aura points! Massive W for the house!">
+            🔥 540 Aura Points W
+          </button>
+          <button class="btn-brutalist btn-mini quick-decree-btn" data-decree="Silence in the house! Bye bye, Big Boss mewing streak locked in! 🗿">
+            🗿 Big Boss Mewing
           </button>
         </div>
       </div>
@@ -446,30 +449,64 @@
 
       <!-- Mandatory Requirement #9: Big Boss Announcement Broadcast Banner & Input -->
       <div class="brutalist-card" style="background: var(--bg-card); border-color: var(--ink-900);">
-        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
           <div style="display: flex; align-items: center; gap: 0.5rem;">
             <span class="sticky-tag rotate-left danger">
               <i class="fa-solid fa-satellite-dish"></i> BIG BOSS DECREE
             </span>
-            <span class="pill-badge" style="background: var(--accent-yellow);">AI ROBOTIC VOICE ON</span>
+            <span class="pill-badge" id="voice-mode-badge" style="background: var(--accent-yellow);">VOICE: 🗿 GIGACHAD SIGMA</span>
           </div>
-          <span style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--ink-500);">DECREE TERMINAL</span>
+
+          <!-- Voice Persona Switcher -->
+          <div style="display: flex; gap: 0.3rem;">
+            <button class="btn-brutalist btn-mini" title="Deep GigaChad Voice" onclick="window.setVoiceMode('sigma')">🗿 Sigma</button>
+            <button class="btn-brutalist btn-mini" title="Slay Baddie Voice" onclick="window.setVoiceMode('slay')">💅 Slay</button>
+            <button class="btn-brutalist btn-mini" title="L Bozo Mocking Voice" onclick="window.setVoiceMode('lbozo')">💀 L Bozo</button>
+            <button class="btn-brutalist btn-mini" title="Among Us Glitch Voice" onclick="window.setVoiceMode('sus')">🛸 Sus</button>
+          </div>
         </div>
 
         <!-- Animated Banner Target -->
         <div id="announcement-banner" class="brutalist-card" style="background: var(--ink-900); color: #fff; padding: 1rem; border-color: var(--accent-pink); margin-bottom: 1rem; min-height: 56px; display: flex; align-items: center;">
           <i class="fa-solid fa-quote-left" style="color: var(--accent-pink); margin-right: 0.75rem; font-size: 1.2rem;"></i>
           <span class="announcement-msg-text" style="font-family: var(--font-mono); font-size: 0.95rem; font-weight: 700; color: var(--accent-lime);">
-            Big Boss: Nominations are now strictly ACTIVE. Danger Zone is live!
+            Big Boss: What the sigma?! Stand on business, no cap on god! 🗿
           </span>
         </div>
 
         <!-- Input Bar with Broadcast Decree Button -->
-        <div style="display: flex; gap: 0.5rem;">
-          <input type="text" id="decree-input" placeholder="Type Big Boss decree (e.g. 'Eviction begins in 5 minutes!')..." style="flex: 1; padding: 0.7rem 1rem; border: var(--border-thick); border-radius: var(--radius-pill); font-family: var(--font-mono); font-size: 0.85rem; outline: none;">
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+          <input type="text" id="decree-input" placeholder="Type decree (e.g. 'Bro think he the main character! Elena is evicted!')..." style="flex: 1; padding: 0.7rem 1rem; border: var(--border-thick); border-radius: var(--radius-pill); font-family: var(--font-mono); font-size: 0.85rem; outline: none;">
           <button class="btn-brutalist btn-lime" id="broadcast-decree-btn">
-            <i class="fa-solid fa-tower-broadcast"></i> BROADCAST DECREE
+            <i class="fa-solid fa-tower-broadcast"></i> BROADCAST
           </button>
+        </div>
+
+        <!-- 🔥 CRAZY GEN-Z MEME SOUNDBOARD BUTTONS -->
+        <div style="border-top: 2px dashed var(--ink-900); padding-top: 0.85rem;">
+          <span style="font-family: var(--font-mono); font-size: 0.7rem; font-weight: 800; color: var(--ink-500); display: block; margin-bottom: 0.5rem;">
+            🎮 1-TAP MEME SOUNDBOARD & SLOGAN TRIGGERS:
+          </span>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.45rem;">
+            <button class="btn-brutalist btn-mini" style="background: #ffffff;" onclick="window.triggerMemeSlogan('sigma')">
+              🗿 WHAT THE SIGMA
+            </button>
+            <button class="btn-brutalist btn-mini btn-danger" onclick="window.triggerMemeSlogan('chat')">
+              🚨 CHAT IS THIS REAL
+            </button>
+            <button class="btn-brutalist btn-mini" style="background: var(--accent-amber-bg);" onclick="window.triggerMemeSlogan('skill_issue')">
+              💀 SKILL ISSUE / L BOZO
+            </button>
+            <button class="btn-brutalist btn-mini btn-yellow" onclick="window.triggerMemeSlogan('cook')">
+              🍳 LET HIM COOK
+            </button>
+            <button class="btn-brutalist btn-mini" style="background: var(--accent-lavender);" onclick="window.triggerMemeSlogan('sus')">
+              🛸 SUSSY IMPOSTOR
+            </button>
+            <button class="btn-brutalist btn-mini btn-lime" onclick="window.triggerMemeSlogan('sheesh')">
+              🔥 SHEESH / HUGE W
+            </button>
+          </div>
         </div>
       </div>
 

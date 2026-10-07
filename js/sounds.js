@@ -163,12 +163,91 @@
       gain.connect(ctx.destination);
 
       whiteNoise.start();
+    },
+
+    // 6. Meme "Bruh" Sound (Vocal Formant Glide)
+    playBruh: function () {
+      if (isMuted) return;
+      const ctx = getAudioContext();
+      if (!ctx) return;
+
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const filter = ctx.createBiquadFilter();
+      const gain = ctx.createGain();
+
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(140, now);
+      osc.frequency.exponentialRampToValueAtTime(65, now + 0.45);
+
+      filter.type = 'bandpass';
+      filter.frequency.setValueAtTime(450, now);
+      filter.Q.value = 4.0;
+
+      gain.gain.setValueAtTime(0.5, now);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.45);
+
+      osc.connect(filter);
+      filter.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(now);
+      osc.stop(now + 0.45);
+    },
+
+    // 7. Among Us Sussy Impostor 4-Note Jingle
+    playSus: function () {
+      if (isMuted) return;
+      const ctx = getAudioContext();
+      if (!ctx) return;
+
+      const now = ctx.currentTime;
+      const notes = [523.25, 622.25, 698.46, 739.99]; // C5, Eb5, F5, F#5
+      notes.forEach((freq, i) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, now + i * 0.12);
+
+        gain.gain.setValueAtTime(0.25, now + i * 0.12);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.12 + 0.15);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(now + i * 0.12);
+        osc.stop(now + i * 0.12 + 0.15);
+      });
+    },
+
+    // 8. "Sheesh" High Pitch Slide
+    playSheesh: function () {
+      if (isMuted) return;
+      const ctx = getAudioContext();
+      if (!ctx) return;
+
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(600, now);
+      osc.frequency.exponentialRampToValueAtTime(1900, now + 0.35);
+
+      gain.gain.setValueAtTime(0.3, now);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(now);
+      osc.stop(now + 0.35);
     }
   };
 
   /**
    * Global Universal SFX Helper
-   * @param {string} type 'beep' | 'airhorn' | 'vineboom' | 'alarm' | 'snap'
+   * @param {string} type 'beep' | 'airhorn' | 'vineboom' | 'alarm' | 'snap' | 'bruh' | 'sus' | 'sheesh'
    */
   window.playSfx = function (type) {
     switch (type) {
@@ -188,6 +267,15 @@
         break;
       case 'snap':
         window.SoundEngine.playSnap();
+        break;
+      case 'bruh':
+        window.SoundEngine.playBruh();
+        break;
+      case 'sus':
+        window.SoundEngine.playSus();
+        break;
+      case 'sheesh':
+        window.SoundEngine.playSheesh();
         break;
       default:
         window.SoundEngine.playBeep();
