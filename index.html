@@ -71,6 +71,7 @@
         <a href="#view-contestants" style="color: var(--ink-700); text-decoration: none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Contestants</a>
         <a href="#view-danger-zone" style="color: var(--ink-700); text-decoration: none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Danger Zone</a>
         <a href="#view-activity-log" onclick="document.querySelector('[data-target-view=view-activity-log]')?.click()" style="color: var(--accent-pink); text-decoration: none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">📜 Activity Log</a>
+        <a href="#view-analytics" onclick="document.querySelector('[data-target-view=view-analytics]')?.click()" style="color: var(--accent-green-ink); text-decoration: none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">📊 Analytics</a>
       </nav>
 
       <!-- Role-Based Access Control Switcher -->
@@ -510,6 +511,10 @@
             <i class="fa-solid fa-clock-rotate-left" style="color: var(--accent-pink);"></i> Live Activity Log
             <span class="pill-badge" style="background: var(--accent-lime); font-size: 0.6rem; padding: 1px 6px; margin-left: auto;">LIVE</span>
           </button>
+          <button class="nav-tab-btn" data-target-view="view-analytics">
+            <i class="fa-solid fa-chart-line" style="color: var(--accent-green-ink);"></i> Performance Analytics
+            <span class="pill-badge" style="background: var(--accent-yellow); font-size: 0.6rem; padding: 1px 6px; margin-left: auto;">KPIs</span>
+          </button>
         </nav>
       </div>
 
@@ -870,6 +875,111 @@
 
         <!-- Full Activity Stream List Container -->
         <div id="activity-stream-full" style="display: flex; flex-direction: column; gap: 0.65rem;"></div>
+      </div>
+
+      <!-- VIEW 7: House Performance & Predictive Analytics Suite -->
+      <div class="view-section" id="view-analytics">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1.25rem;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
+              <h2 style="font-family: var(--font-serif); font-size: 1.6rem; font-weight: 900; margin: 0;">📊 House Performance & Predictive Analytics</h2>
+              <span class="pill-badge" style="background: var(--accent-lime); font-size: 0.65rem; font-weight: 800; display: inline-flex; align-items: center; gap: 4px;">
+                <span class="rec-pulse-dot" style="background: var(--accent-green-ink);"></span> REAL-TIME ENGINE
+              </span>
+            </div>
+            <p style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-500); margin: 0.2rem 0 0;">
+              Computational telemetry, team power rankings, predictive win probability models, and bounty velocity.
+            </p>
+          </div>
+
+          <div style="display: flex; gap: 0.45rem; align-items: center; flex-wrap: wrap;">
+            <button class="btn-brutalist btn-mini btn-lime" id="refresh-analytics-btn" title="Recalculate live statistics">
+              <i class="fa-solid fa-arrows-rotate"></i> Refresh Metrics
+            </button>
+            <button class="btn-brutalist btn-mini btn-yellow" id="export-analytics-csv-btn" title="Download analytics breakdown as CSV">
+              <i class="fa-solid fa-file-csv"></i> Export CSV
+            </button>
+          </div>
+        </div>
+
+        <!-- KPI Summary Cards Grid -->
+        <div class="analytics-kpi-grid" id="analytics-kpi-container"></div>
+
+        <!-- Dual Chart.js Comparison Panels -->
+        <div class="analytics-charts-grid">
+          <!-- Chart A: Points & Bounty Distribution -->
+          <div class="analytics-chart-box">
+            <div class="analytics-chart-box-header">
+              <div class="analytics-chart-box-title">
+                <i class="fa-solid fa-chart-column" style="color: var(--accent-lime);"></i> Contestant Score & Bounty Equivalents
+              </div>
+              <span class="pill-badge" style="background: var(--accent-lavender); font-size: 0.65rem;">LIVE STANDINGS</span>
+            </div>
+            <div class="analytics-chart-canvas-wrap">
+              <canvas id="analytics-bar-canvas"></canvas>
+            </div>
+          </div>
+
+          <!-- Chart B: Team Faction Share -->
+          <div class="analytics-chart-box">
+            <div class="analytics-chart-box-header">
+              <div class="analytics-chart-box-title">
+                <i class="fa-solid fa-chart-pie" style="color: var(--accent-pink);"></i> Faction Point Share
+              </div>
+              <span class="pill-badge" style="background: var(--bg-paper); font-size: 0.65rem;">TEAMS ALPHA/BETA/OMEGA</span>
+            </div>
+            <div class="analytics-chart-canvas-wrap">
+              <canvas id="analytics-doughnut-canvas"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Predictive Win Probability & Power Rankings Table -->
+        <div class="analytics-table-card">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+            <div>
+              <h3 style="font-family: var(--font-serif); font-size: 1.2rem; font-weight: 900; margin: 0;">
+                🎯 Predictive Win Probability & Power Rankings
+              </h3>
+              <span style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--ink-500);">
+                Weighted algorithm: Points (45%) + Tasks (25%) + Immunity (15%) + Streak (10%) - Danger Penalty (15%)
+              </span>
+            </div>
+            <span class="sticky-tag rotate-right lime">
+              ★ HEURISTIC AI MODEL
+            </span>
+          </div>
+
+          <div class="analytics-table-wrap">
+            <table class="analytics-table">
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>Housemate</th>
+                  <th>Score</th>
+                  <th>Tasks</th>
+                  <th>Status</th>
+                  <th>Win Probability</th>
+                  <th>Tier</th>
+                </tr>
+              </thead>
+              <tbody id="analytics-rankings-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Team Comparison Benchmark Cards -->
+        <div style="margin-bottom: 0.75rem;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.85rem;">
+            <h3 style="font-family: var(--font-serif); font-size: 1.2rem; font-weight: 900; margin: 0;">
+              ⚔️ Faction Head-to-Head Benchmarks
+            </h3>
+            <span class="pill-badge" style="background: var(--accent-yellow); font-size: 0.7rem; font-weight: 800;">
+              3 TEAMS COMPETING
+            </span>
+          </div>
+          <div class="team-comparison-grid" id="analytics-team-cards-container"></div>
+        </div>
       </div>
     </section>
 

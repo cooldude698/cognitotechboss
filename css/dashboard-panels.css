@@ -649,6 +649,7 @@
 }
 
 /* ============================================
+<<<<<<< HEAD
    EVENT NOTIFICATIONS & TOAST HUD
    ============================================ */
 .toast-stack-container {
@@ -795,3 +796,305 @@
   border-bottom: none;
 }
 
+=======
+   7. PERFORMANCE & PREDICTIVE ANALYTICS SUITE
+   ============================================ */
+
+/* KPI Container Grid */
+.analytics-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.analytics-kpi-card {
+  background: #ffffff;
+  border: var(--border-thick);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: 16px;
+  text-align: center;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.analytics-kpi-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.analytics-kpi-card .kpi-icon {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+.analytics-kpi-card .kpi-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--ink-500);
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.analytics-kpi-card .kpi-value {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--ink-900);
+  line-height: 1.1;
+}
+
+.analytics-kpi-card .kpi-sub {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: var(--ink-500);
+  margin-top: 4px;
+}
+
+.analytics-kpi-card.highlight-lime {
+  border-color: #121214;
+  background: linear-gradient(135deg, #ffffff 75%, var(--accent-lime) 100%);
+}
+
+.analytics-kpi-card.highlight-yellow {
+  border-color: #121214;
+  background: linear-gradient(135deg, #ffffff 75%, var(--accent-yellow) 100%);
+}
+
+.analytics-kpi-card.highlight-lavender {
+  border-color: #121214;
+  background: linear-gradient(135deg, #ffffff 75%, var(--accent-lavender) 100%);
+}
+
+.analytics-kpi-card.highlight-danger {
+  border-color: var(--accent-danger-ink);
+  background: linear-gradient(135deg, #ffffff 75%, var(--accent-danger) 100%);
+}
+
+.analytics-kpi-card.highlight-pink {
+  border-color: #121214;
+  background: linear-gradient(135deg, #ffffff 75%, var(--accent-pink) 25%);
+}
+
+/* Charts Dual Box Grid */
+.analytics-charts-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 900px) {
+  .analytics-charts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.analytics-chart-box {
+  background: #ffffff;
+  border: var(--border-heavy);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.analytics-chart-box-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  border-bottom: 2px solid var(--ink-900);
+  padding-bottom: 8px;
+}
+
+.analytics-chart-box-title {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--ink-900);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.analytics-chart-canvas-wrap {
+  position: relative;
+  height: 280px;
+  width: 100%;
+}
+
+/* Power Rankings Table */
+.analytics-table-card {
+  background: #ffffff;
+  border: var(--border-heavy);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.analytics-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.analytics-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-sans);
+  font-size: 13px;
+}
+
+.analytics-table th {
+  background: var(--bg-paper-alt);
+  border-bottom: 2px solid var(--ink-900);
+  padding: 10px 14px;
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--ink-700);
+  letter-spacing: 0.5px;
+}
+
+.analytics-table td {
+  padding: 12px 14px;
+  border-bottom: 1px dashed var(--ink-300);
+  vertical-align: middle;
+}
+
+.analytics-row:hover {
+  background: rgba(212, 247, 124, 0.12);
+}
+
+.rank-pill {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border: 1.5px solid var(--ink-900);
+  border-radius: var(--radius-pill);
+  background: var(--bg-paper);
+}
+
+.rank-pill.rank-top {
+  background: var(--accent-lime);
+  box-shadow: 1px 1px 0 var(--ink-900);
+}
+
+/* Probability Progress Bar */
+.probability-track {
+  width: 100px;
+  height: 10px;
+  background: #e5e7eb;
+  border: 1.5px solid var(--ink-900);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  box-shadow: 1px 1px 0 var(--ink-900);
+}
+
+.probability-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-lime), #16a34a);
+  border-radius: var(--radius-pill);
+  transition: width 0.6s ease;
+}
+
+/* Tier Badges */
+.tier-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 800;
+  padding: 3px 10px;
+  border: 1.5px solid var(--ink-900);
+  border-radius: var(--radius-pill);
+  box-shadow: 1px 1px 0 var(--ink-900);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.tier-badge.tier-s {
+  background: var(--accent-yellow);
+  color: var(--ink-900);
+}
+
+.tier-badge.tier-a {
+  background: var(--accent-lime);
+  color: var(--ink-900);
+}
+
+.tier-badge.tier-b {
+  background: var(--accent-lavender);
+  color: var(--ink-900);
+}
+
+.tier-badge.tier-danger {
+  background: var(--accent-danger);
+  color: var(--accent-danger-ink);
+}
+
+/* Team Comparison Cards Grid */
+.team-comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.team-comparison-card {
+  background: #ffffff;
+  border: var(--border-thick);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: 16px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.team-comparison-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.team-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  border-bottom: 1.5px solid var(--ink-900);
+  padding-bottom: 8px;
+}
+
+.team-card-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.team-mini-stat {
+  background: var(--bg-paper-alt);
+  border: 1.5px solid var(--ink-900);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  text-align: center;
+}
+
+.team-mini-stat .val {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 900;
+  display: block;
+  color: var(--ink-900);
+}
+
+.team-mini-stat .lbl {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 800;
+  color: var(--ink-500);
+  text-transform: uppercase;
+}
+>>>>>>> 6cfba87 (feat: add performance and predictive analytics suite with KPIs and telemetry charts)
