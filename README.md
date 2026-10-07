@@ -50,8 +50,8 @@ Every requirement from the official checklist is fully implemented, reactive, an
 8. **🔐 Role-Based Access Control (RBAC Engine):** 3 distinct operational roles:
    - **👑 Big Boss (Super-Admin):** Full master authority (Evictions, Decrees, Captaincy, Point Overrides, Master Reset).
    - **🎬 Show Producer (Director):** Operational controls (Task Management, Countdown Timer, Nominations, Points).
-   - **👁️ Audience / Spectator (Viewer):** Read-only telemetry with interactive live Fan Voting (`❤️ +10 pts`).
 9. **🚨 Live Event Notifications & Toast HUD:** Real-time event notifications with auto-dismiss progress countdown, category filters (`Urgent`, `Decrees`, `Tasks`), interactive top-nav Bell tray (`🔔`), audio synchronization, and Web Desktop Push Notifications API.
+10. **📊 Performance & Predictive Analytics Suite:** Real-time KPI summary deck, dual interactive Chart.js visualizations (Bounty distribution & Faction share), weighted win probability heuristic models (S/A/B/Danger tiers), team benchmarks, and 1-click CSV telemetry export.
 
 ---
 
@@ -143,6 +143,7 @@ cognitotechboss/
     ├── activityLog.js          # Real-time activity log & audit stream, filtering, search & JSON export
     ├── rbac.js                 # Role-Based Access Control engine (Big Boss, Producer, Spectator & live fan voting)
     ├── notifications.js        # Live event notification engine, HUD toasts, bell tray & desktop push
+    ├── analytics.js            # House performance analytics, predictive win probability models & CSV export
     └── app.js                  # Master app initializer, tab navigation, global listeners
 ```
 

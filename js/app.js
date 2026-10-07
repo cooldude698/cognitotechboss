@@ -92,11 +92,25 @@
     updateActivityLogUI();
   });
 
+  function handleHashNavigation() {
+    const hash = window.location.hash;
+    if (hash && hash.startsWith('#view-')) {
+      const targetView = hash.substring(1);
+      const tabBtn = document.querySelector(`[data-target-view="${targetView}"]`);
+      if (tabBtn) {
+        tabBtn.click();
+      }
+    }
+  }
+
+  window.addEventListener('hashchange', handleHashNavigation);
+
   document.addEventListener('DOMContentLoaded', () => {
     initNavigation();
     initGlobalListeners();
     updateDramaMeterUI();
     updateActivityLogUI();
+    handleHashNavigation();
     console.log('🚀 Big Boss Command Center Initialized & Ready.');
   });
 })();
