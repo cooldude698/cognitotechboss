@@ -127,7 +127,7 @@ cognitotechboss/
     ├── state.js                # Central Reactive State Store (window.AppState, dispatchStateChange)
     ├── sounds.js               # Web Audio API procedural sound synthesizer (window.playSfx)
     ├── effects.js              # Matrix rain, screen shake, floating points, CCTV timecodes
-    ├── announcements.js        # Big Boss broadcast decree terminal & AI robotic voice
+    ├── announcements.js        # Unhinged Gen-Z meme broadcaster, 4 voice personas, 12 viral slogans & random roast engine
     ├── timer.js                # Task countdown clock, circular SVG ring, panic mode
     ├── eviction.js             # Eviction ceremony, Thanos snap particle disintegration
     ├── contestants.js          # Contestant cards renderer, points buttons, immunity locks

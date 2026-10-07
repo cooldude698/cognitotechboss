@@ -242,6 +242,122 @@
 
       osc.start(now);
       osc.stop(now + 0.35);
+    },
+
+    // 9. Metal Pipe Falling Clang (Iconic Meme Clang)
+    playMetalPipe: function () {
+      if (isMuted) return;
+      const ctx = getAudioContext();
+      if (!ctx) return;
+
+      const now = ctx.currentTime;
+      // Resonant metallic frequencies
+      const freqs = [380, 520, 710, 1140, 1820, 2480];
+      freqs.forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = (idx % 2 === 0) ? 'sawtooth' : 'triangle';
+        osc.frequency.setValueAtTime(freq, now);
+        osc.frequency.exponentialRampToValueAtTime(freq * 0.85, now + 0.9);
+
+        const initialVol = 0.25 / (idx + 1);
+        gain.gain.setValueAtTime(initialVol, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + (0.4 + idx * 0.1));
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(now);
+        osc.stop(now + 0.9);
+      });
+    },
+
+    // 10. Sad Trombone (Womp Womp Womp Womp)
+    playSadTrombone: function () {
+      if (isMuted) return;
+      const ctx = getAudioContext();
+      if (!ctx) return;
+
+      const now = ctx.currentTime;
+      const notes = [
+        { f: 293.66, t: 0.0, d: 0.25 }, // D4
+        { f: 277.18, t: 0.25, d: 0.25 }, // C#4
+        { f: 261.63, t: 0.50, d: 0.25 }, // C4
+        { f: 246.94, t: 0.75, d: 0.65 }  // B3 (slide down)
+      ];
+
+      notes.forEach((note, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(note.f, now + note.t);
+        if (idx === 3) {
+          // Slide down on last womp
+          osc.frequency.linearRampToValueAtTime(note.f * 0.8, now + note.t + note.d);
+        }
+
+        gain.gain.setValueAtTime(0.25, now + note.t);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + note.t + note.d);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(now + note.t);
+        osc.stop(now + note.t + note.d);
+      });
+    },
+
+    // 11. Skibidi Beat Burst (Kick + Hi-hat techno rhythm)
+    playSkibidiBeat: function () {
+      if (isMuted) return;
+      const ctx = getAudioContext();
+      if (!ctx) return;
+
+      const now = ctx.currentTime;
+      // 4 quick rhythmic kicks with pitch envelope
+      for (let i = 0; i < 4; i++) {
+        const kickOsc = ctx.createOscillator();
+        const kickGain = ctx.createGain();
+
+        kickOsc.type = 'sine';
+        kickOsc.frequency.setValueAtTime(150, now + i * 0.12);
+        kickOsc.frequency.exponentialRampToValueAtTime(40, now + i * 0.12 + 0.08);
+
+        kickGain.gain.setValueAtTime(0.4, now + i * 0.12);
+        kickGain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.12 + 0.08);
+
+        kickOsc.connect(kickGain);
+        kickGain.connect(ctx.destination);
+
+        kickOsc.start(now + i * 0.12);
+        kickOsc.stop(now + i * 0.12 + 0.08);
+      }
+    },
+
+    // 12. Arcade Coin / Fanum Tax Yoink
+    playCoinTax: function () {
+      if (isMuted) return;
+      const ctx = getAudioContext();
+      if (!ctx) return;
+
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'square';
+      osc.frequency.setValueAtTime(987.77, now); // B5
+      osc.frequency.setValueAtTime(1318.51, now + 0.08); // E6
+
+      gain.gain.setValueAtTime(0.25, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(now);
+      osc.stop(now + 0.35);
     }
   };
 
@@ -276,6 +392,21 @@
         break;
       case 'sheesh':
         window.SoundEngine.playSheesh();
+        break;
+      case 'metalpipe':
+      case 'pipe':
+        window.SoundEngine.playMetalPipe();
+        break;
+      case 'sadtrombone':
+      case 'womp':
+        window.SoundEngine.playSadTrombone();
+        break;
+      case 'skibidi':
+        window.SoundEngine.playSkibidiBeat();
+        break;
+      case 'cointax':
+      case 'fanum':
+        window.SoundEngine.playCoinTax();
         break;
       default:
         window.SoundEngine.playBeep();
