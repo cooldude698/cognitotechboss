@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BIG BOSS COMMAND CENTER — Tech House Reality Ops</title>
+  <title>CareBridge Big Boss — Digital Command Center</title>
 
   <!-- Google Fonts: Syne, JetBrains Mono, DM Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,7 +38,7 @@
     </div>
     <div class="broadcast-ticker-wrap">
       <span class="broadcast-ticker" id="announcement-ticker">
-        🚨 BIG BOSS DECREE: NOMINATIONS ARE NOW LIVE • DANGER ZONE IS ACTIVE • ALL CONTESTANTS REPORT TO MAIN DEN •
+        🚨 BIG BOSS DECREE: NOMINATIONS ARE NOW LIVE • DANGER ZONE IS ACTIVE • ALL CONTESTANTS TAKE POSITIONS •
       </span>
     </div>
     <div class="system-status-indicator">
@@ -47,38 +47,327 @@
     </div>
   </header>
 
-  <!-- 2. Master Header Navigation -->
-  <div class="main-header">
-    <div class="brand-wrapper">
-      <div class="brand-logo-eye">
-        <i class="fa-solid fa-eye"></i>
+  <!-- 2. CareBridge-Style Sticky Main Header Navigation -->
+  <div style="background: rgba(251, 249, 244, 0.94); backdrop-filter: blur(8px); border-bottom: 2px solid var(--ink-900); position: sticky; top: 40px; z-index: 999;">
+    <div class="main-header" style="padding: 0.9rem 2rem;">
+      <div class="brand-wrapper">
+        <a href="#" style="display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: inherit;">
+          <div style="width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--ink-900); background: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 2px 2px 0px var(--ink-900);">
+            <div style="width: 14px; height: 14px; border-radius: 50%; background: var(--accent-yellow); border: 2px solid var(--ink-900);"></div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="font-family: var(--font-serif); font-size: 1.6rem; font-weight: 900; letter-spacing: -0.04em;">techboss</span>
+            <span style="font-family: var(--font-mono); font-size: 0.65rem; font-weight: 800; background: var(--accent-lavender); border: 1px solid var(--ink-900); padding: 2px 8px; border-radius: 9999px;">
+              CRCE • 2026
+            </span>
+          </div>
+        </a>
       </div>
-      <div class="brand-text">
-        <h1>BIG BOSS COMMAND</h1>
-        <span>DIGITAL OPS CENTER • ROUND 1 SPRINT</span>
+
+      <!-- Center Nav Links -->
+      <nav style="display: flex; align-items: center; gap: 1.5rem; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 800;">
+        <a href="#control-deck" style="color: var(--ink-700); text-decoration: none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Control Deck</a>
+        <a href="#triage-sandbox" style="color: var(--ink-700); text-decoration: none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Live Sandbox</a>
+        <a href="#view-contestants" style="color: var(--ink-700); text-decoration: none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Contestants</a>
+        <a href="#view-danger-zone" style="color: var(--ink-700); text-decoration: none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Danger Zone</a>
+      </nav>
+
+      <!-- Right Action Pill Buttons -->
+      <div class="header-actions">
+        <button class="btn-brutalist btn-lime" id="load-demo-state-btn" title="Populate rich 8-contestant demo state in 0.1s">
+          <i class="fa-solid fa-bolt"></i> ⚡ LOAD DEMO STATE
+        </button>
+        <button class="btn-brutalist btn-yellow" id="sound-toggle-btn">
+          <i class="fa-solid fa-volume-high"></i> SOUND FX
+        </button>
       </div>
-    </div>
-
-    <div class="header-actions">
-      <!-- 1-Click Load Demo State for Evaluator Instant Testing -->
-      <button class="btn-brutalist btn-lime" id="load-demo-state-btn" title="Populate rich 8-contestant demo state in 0.1s">
-        <i class="fa-solid fa-bolt"></i> ⚡ LOAD DEMO STATE
-      </button>
-
-      <!-- Procedural Sound Engine Mute/Unmute Toggle -->
-      <button class="btn-brutalist btn-yellow" id="sound-toggle-btn">
-        <i class="fa-solid fa-volume-high"></i> SOUND FX
-      </button>
-
-      <!-- Emergency House Reset -->
-      <button class="btn-brutalist btn-danger" id="reset-house-btn" title="Purge and reset state">
-        <i class="fa-solid fa-rotate-left"></i> RESET
-      </button>
     </div>
   </div>
 
-  <!-- 3. Master 3-Column Command Center Grid -->
-  <main class="command-center-container">
+  <!-- =========================================================================
+       3. ICONIC CAREBRIDGE HERO SECTION WITH PINK HIGHLIGHTER & FANNED CARDS
+       ========================================================================= -->
+  <section style="max-width: 1280px; margin: 0 auto; padding: 3.5rem 1.5rem 2.5rem; text-align: center; position: relative;">
+    
+    <!-- Top Capsule Pill -->
+    <div style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.45rem 1.1rem; border-radius: 9999px; border: 2px solid var(--ink-900); background: #ffffff; box-shadow: 2px 2px 0px var(--ink-900); margin-bottom: 1.5rem;">
+      <i class="fa-solid fa-gear" style="font-size: 0.85rem;"></i>
+      <span style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em;">
+        Continuous Explainable Reality Command Loop
+      </span>
+    </div>
+
+    <!-- Main Headline with Iconic CareBridge Pink Highlighter Box -->
+    <h1 style="font-family: var(--font-serif); font-size: clamp(2.5rem, 5.5vw, 4.2rem); font-weight: 900; line-height: 1.08; letter-spacing: -0.04em; max-width: 950px; margin: 0 auto 1.25rem;">
+      Give the Tech House a glow up. Meet your new <span class="highlight-pink">clinical copilot.</span>
+    </h1>
+
+    <p style="font-family: var(--font-sans); font-size: 1.1rem; color: var(--ink-700); max-width: 680px; margin: 0 auto 2rem; line-height: 1.55;">
+      Capture, triage, and elevate house drama across contestants, bounties, and nominations in real time.
+    </p>
+
+    <!-- CTAs -->
+    <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem;">
+      <a href="#control-deck" class="btn-brutalist btn-lime" style="padding: 0.8rem 1.8rem; font-size: 0.85rem;">
+        <i class="fa-solid fa-shield-halved"></i> EXPLORE HOUSE COCKPIT
+      </a>
+      <button class="btn-brutalist" style="background: #ffffff; padding: 0.8rem 1.8rem; font-size: 0.85rem;" onclick="document.getElementById('decree-input').focus();">
+        <i class="fa-solid fa-microphone" style="color: var(--accent-pink);"></i> Try Voice Decree (Hindi/English)
+      </button>
+    </div>
+
+    <!-- Tilted Sticky Notes Around Hero -->
+    <div style="position: absolute; top: 18%; left: 3%; z-index: 20;" class="sticky-tag rotate-left yellow">
+      <span>📌 "Help me evict the lowest scorer"</span>
+    </div>
+    <div style="position: absolute; top: 22%; right: 4%; z-index: 20;" class="sticky-tag rotate-right pink">
+      <span>⚡ "Help me analyze Elena's drama spike"</span>
+    </div>
+
+    <!-- Fanned Out Cards Showcase (from CareBridge Screenshot 1) -->
+    <div class="fan-cards-showcase">
+      <!-- Card 1: Vedesh -->
+      <div class="fan-card" style="transform: rotate(-8deg) translateY(12px); z-index: 10;">
+        <div style="height: 130px; border-radius: var(--radius-md); background: rgba(254, 225, 89, 0.25); border: 2px solid var(--ink-900); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0.75rem; margin-bottom: 0.75rem;">
+          <span style="font-family: var(--font-mono); font-size: 0.65rem; font-weight: 800; background: #fff; padding: 1px 6px; border-radius: 4px; border: 1px solid var(--ink-900); margin-bottom: 0.25rem;">VEDESH (CAPTAIN)</span>
+          <div style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--ink-900); background: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; box-shadow: 2px 2px 0px var(--ink-900);">🦁</div>
+          <span style="font-family: var(--font-serif); font-size: 0.75rem; font-weight: 800; margin-top: 0.35rem; font-style: italic;">"House rules are absolute"</span>
+        </div>
+        <div style="background: var(--accent-lime); border: 1px solid var(--ink-900); border-radius: 4px; padding: 3px 6px; font-family: var(--font-mono); font-size: 0.65rem; font-weight: 800; box-shadow: 1px 1px 0px var(--ink-900); transform: rotate(2deg); margin-bottom: 0.5rem;">
+          Immunity Active: 540 pts ✓
+        </div>
+        <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700;">
+          <span>Slay Streak</span>
+          <span style="color: var(--accent-green-ink);">5 Rounds</span>
+        </div>
+      </div>
+
+      <!-- Card 2: Book of Rules (Black Card) -->
+      <div class="fan-card" style="transform: rotate(-3deg) translateY(-8px); z-index: 20; background: var(--ink-900); color: #ffffff;">
+        <div style="height: 130px; border-radius: var(--radius-md); background: var(--ink-800); border: 1px solid rgba(255,255,255,0.25); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0.75rem; margin-bottom: 0.75rem;">
+          <span style="font-family: var(--font-mono); font-size: 0.65rem; font-weight: 800; color: var(--accent-lime); letter-spacing: 0.05em;">HEURISTICS</span>
+          <h3 style="font-family: var(--font-serif); font-size: 1.3rem; font-weight: 900; margin: 0.2rem 0;">Book of Rules</h3>
+          <span style="color: var(--accent-yellow); font-size: 1.3rem;">⚖️</span>
+          <span style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--ink-300);">8 Deterministic Rules</span>
+        </div>
+        <p style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent-lime); font-weight: 700; margin-bottom: 0.2rem;">● Rule #1: Leaderboard Delta</p>
+        <p style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--ink-300);">● Rule #4: Danger Adherence</p>
+      </div>
+
+      <!-- Card 3: Let it Flow (Hero Centerpiece) -->
+      <div class="fan-card" style="transform: scale(1.08) translateY(-18px); z-index: 30; width: 230px; background: #FAF8F5;">
+        <div style="height: 145px; border-radius: var(--radius-md); background: var(--accent-lavender); border: 2px solid var(--ink-900); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0.75rem; margin-bottom: 0.75rem;">
+          <span style="font-family: var(--font-serif); font-size: 1.15rem; font-weight: 800; font-style: italic;">Let it Flow</span>
+          <div style="margin: 0.4rem 0;">
+            <i class="fa-solid fa-eye" style="font-size: 2rem; color: var(--ink-900);"></i>
+          </div>
+          <span class="pill-badge" style="background: #fff; font-size: 0.65rem;">Continuous Control Loop</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; margin-bottom: 0.25rem;">
+          <span>Baseline Score</span>
+          <span style="color: var(--accent-green-ink);">420 pts Avg</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700;">
+          <span>House Drama</span>
+          <span style="color: var(--accent-danger-ink);">75% High</span>
+        </div>
+      </div>
+
+      <!-- Card 4: AI Brief -->
+      <div class="fan-card" style="transform: rotate(3deg) translateY(-8px); z-index: 20;">
+        <div style="height: 130px; border-radius: var(--radius-md); background: rgba(212, 247, 124, 0.25); border: 2px solid var(--ink-900); display: flex; flex-direction: column; justify-content: space-between; padding: 0.75rem; margin-bottom: 0.75rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span class="pill-badge" style="font-size: 0.6rem; background: #fff;">AI BRIEF</span>
+            <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--accent-green-ink);"></span>
+          </div>
+          <div>
+            <h4 style="font-family: var(--font-serif); font-size: 0.95rem; font-weight: 900; line-height: 1.1;">15s Pre-Decree Synthesis</h4>
+            <p style="font-size: 0.65rem; color: var(--ink-700); margin-top: 0.25rem;">7-day activity synthesized before consult.</p>
+          </div>
+          <span style="font-family: var(--font-mono); font-size: 0.65rem; font-weight: 800; color: var(--accent-pink);">✨ Cockpit Ready</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.7rem;">
+          <span style="color: var(--ink-500);">Review time:</span>
+          <strong>&lt; 15 sec</strong>
+        </div>
+      </div>
+
+      <!-- Card 5: Audience Family Circle -->
+      <div class="fan-card" style="transform: rotate(8deg) translateY(12px); z-index: 10;">
+        <div style="height: 130px; border-radius: var(--radius-md); background: rgba(255, 92, 152, 0.2); border: 2px solid var(--ink-900); display: flex; flex-direction: column; justify-content: space-between; padding: 0.75rem; margin-bottom: 0.75rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span class="pill-badge" style="font-size: 0.6rem; background: #fff;">AUDIENCE</span>
+            <span style="font-size: 0.8rem;">💬</span>
+          </div>
+          <div style="background: #fff; border: 1px solid var(--ink-900); padding: 0.35rem; border-radius: 6px; font-family: var(--font-mono); font-size: 0.65rem;">
+            <strong>WhatsApp Alert:</strong>
+            <p style="color: var(--ink-700); margin: 0;">"Elena in danger. Vote sent."</p>
+          </div>
+          <span style="font-family: var(--font-mono); font-size: 0.65rem; font-weight: 800; color: var(--accent-green-ink);">Protected</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.7rem;">
+          <span style="color: var(--ink-500);">Response:</span>
+          <strong>&lt; 8 mins</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Tilted Sticky Tag -->
+    <div style="margin-top: 2rem;">
+      <div class="sticky-tag rotate-left lime">
+        <span>★ 8 Active Contestants Across 3 Teams • CRCE Hackathon 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       4. CAREBRIDGE INTERACTIVE TELEMETRY & SANDBOX SECTION (SCREENSHOT 3)
+       ========================================================================= -->
+  <section id="triage-sandbox" style="max-width: 1240px; margin: 2rem auto 4rem; padding: 0 1.5rem;">
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <h2 style="font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; letter-spacing: -0.03em; margin-bottom: 0.5rem;">
+        Turn midnight musings into morning action plans
+      </h2>
+      <p style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--ink-500); max-width: 600px; margin: 0 auto;">
+        Try the real-time simulation below. Tap an event trigger to watch the deterministic triage engine re-score risk and update clinical action pathways.
+      </p>
+    </div>
+
+    <!-- The Exact CareBridge Interactive Sandbox Component -->
+    <div class="sandbox-hero-box" id="genz-sandbox-panel">
+      <!-- Lime Top Bar -->
+      <div class="sandbox-hero-header">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <span style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 900; color: var(--ink-900);">Wide open spaces</span>
+          <span class="pill-badge" style="background: #fff; font-size: 0.7rem;">INTERACTIVE TRIAGE SANDBOX</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 800;">
+          <span class="rec-pulse-dot" style="background: var(--accent-green-ink);"></span>
+          <span>LIVE TELEMETRY SANDBOX</span>
+        </div>
+      </div>
+
+      <!-- 2-Column Body -->
+      <div class="sandbox-hero-body">
+        
+        <!-- Left: Step 1 Inject Simulated Events -->
+        <div>
+          <div style="display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 800; color: var(--ink-700); margin-bottom: 1rem;">
+            <i class="fa-solid fa-sliders"></i> STEP 1 • INJECT A SIMULATED EVENT
+          </div>
+
+          <!-- Button 1: Red Spike -->
+          <div class="sandbox-event-btn event-red" onclick="window.triggerSandboxEvent('DRAMA_FIGHT');">
+            <div class="sandbox-event-btn-header" style="color: var(--accent-danger-ink);">
+              <span>⚡ TRIGGER DRAMA SPIKE (95%)</span>
+              <span class="pill-badge" style="background: var(--accent-danger-ink); color: #fff; border: none;">FLIP TO RED</span>
+            </div>
+            <div class="sandbox-event-btn-sub">
+              Simulates acute pantry dispute + 2 nominees added to Danger Zone. Triggers alarm siren.
+            </div>
+          </div>
+
+          <!-- Button 2: Green Stabilize -->
+          <div class="sandbox-event-btn event-green" onclick="window.triggerSandboxEvent('SLAY_BOOST');">
+            <div class="sandbox-event-btn-header" style="color: var(--accent-green-ink);">
+              <span>✓ SLAY STREAK BOOST (+100 PTS)</span>
+              <span class="pill-badge" style="background: var(--accent-green-ink); color: #fff; border: none;">FLIP TO GREEN</span>
+            </div>
+            <div class="sandbox-event-btn-sub">
+              Simulates Captain luxury raid. Awards +100 pts and launches confetti celebration.
+            </div>
+          </div>
+
+          <!-- Button 3: Amber Penalty -->
+          <div class="sandbox-event-btn event-amber" onclick="window.triggerSandboxEvent('SKILL_ISSUE');">
+            <div class="sandbox-event-btn-header" style="color: var(--accent-amber-ink);">
+              <span>🚶 SKILL ISSUE PENALTY (-50 PTS)</span>
+              <span class="pill-badge" style="background: var(--accent-amber-ink); color: #fff; border: none;">SET TO AMBER</span>
+            </div>
+            <div class="sandbox-event-btn-sub">
+              Deducts 50 pts from lowest scorer. Drops house morale and plays Vine Boom.
+            </div>
+          </div>
+
+          <div style="margin-top: 1rem;">
+            <a href="#control-deck" style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 800; color: var(--ink-900); text-decoration: underline;">
+              Launch Full Judge Control Simulator Panel →
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Real-Time Patient/Contestant Telemetry Card (Exact from Screenshot 3) -->
+        <div class="brutalist-card" style="background: #ffffff; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <!-- Header Row -->
+            <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid var(--ink-900); padding-bottom: 1rem; margin-bottom: 1rem;">
+              <div style="display: flex; align-items: center; gap: 0.85rem;">
+                <div style="width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--ink-900); background: var(--accent-yellow); display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 1.25rem; font-weight: 900; box-shadow: 2px 2px 0px var(--ink-900);">
+                  RS
+                </div>
+                <div>
+                  <h3 style="font-family: var(--font-serif); font-size: 1.3rem; font-weight: 900; margin: 0; line-height: 1.1;">
+                    Vedesh (Captain)
+                  </h3>
+                  <span style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--ink-500);">
+                    Team Alpha • House MVP • Dr. Big Boss
+                  </span>
+                </div>
+              </div>
+
+              <!-- Amber Badge from Screenshot 3 -->
+              <span class="pill-badge" style="background: var(--accent-amber-bg); color: var(--accent-amber-ink); border: 2px solid var(--accent-amber-ink); padding: 0.35rem 0.85rem; font-size: 0.75rem; gap: 0.4rem;">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span>MODERATE</span>
+                <span style="border-left: 1px solid var(--accent-amber-ink); padding-left: 0.4rem; font-weight: 900;">54</span>
+              </span>
+            </div>
+
+            <!-- Amber Alert Notification Banner -->
+            <div style="background: var(--accent-amber-bg); border: 2px solid var(--ink-900); border-radius: var(--radius-md); padding: 0.75rem 1rem; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 800; color: var(--accent-amber-ink); display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+              <i class="fa-solid fa-circle-check" style="color: var(--accent-green-ink);"></i>
+              <span>Moderate Risk — Automated WhatsApp reminder scheduled for family at 8:00 PM.</span>
+            </div>
+
+            <!-- Active Heuristics Header -->
+            <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 800; color: var(--ink-500); margin-bottom: 0.5rem;">
+              <span>ACTIVE DETERMINISTIC HEURISTICS</span>
+              <span>Calculated in real-time</span>
+            </div>
+
+            <!-- Heuristic Items with Black Borders -->
+            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+              <div style="background: var(--bg-paper-alt); border: 2px solid var(--ink-900); border-radius: var(--radius-md); padding: 0.65rem 0.85rem; font-family: var(--font-mono); font-size: 0.75rem; display: flex; align-items: center; gap: 0.5rem; box-shadow: 2px 2px 0px var(--ink-900);">
+                <span style="color: var(--accent-pink); font-weight: 900;">●</span>
+                <span>Missed 2 evening doses of Metformin 500mg in 72 hours (Adherence: 71%)</span>
+              </div>
+              <div style="background: var(--bg-paper-alt); border: 2px solid var(--ink-900); border-radius: var(--radius-md); padding: 0.65rem 0.85rem; font-family: var(--font-mono); font-size: 0.75rem; display: flex; align-items: center; gap: 0.5rem; box-shadow: 2px 2px 0px var(--ink-900);">
+                <span style="color: var(--accent-pink); font-weight: 900;">●</span>
+                <span>Systolic BP trending upward (+9% vs 14-day baseline)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Row with Black Button -->
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 1.25rem; border-top: 2px solid var(--ink-900); pt-3; padding-top: 0.75rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 800;">
+              <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--accent-green-ink);"></span>
+              <span>FHIR R4 Observation Ready</span>
+            </div>
+            <a href="#view-contestants" class="btn-brutalist btn-ink" style="font-size: 0.72rem; padding: 0.5rem 1rem;">
+              Open Full Patient Chart →
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       5. MASTER 3-COLUMN COMMAND CENTER GRID (CONTROL DECK)
+       ========================================================================= -->
+  <main class="command-center-container" id="control-deck">
 
     <!-- ==================== LEFT COLUMN: NAV & DRAMA GAUGE ==================== -->
     <aside class="hud-col-left">
@@ -399,30 +688,6 @@
         <!-- Prit's Frozen Container ID -->
         <div style="height: 160px; width: 100%;">
           <canvas id="charts-canvas"></canvas>
-        </div>
-      </div>
-
-      <!-- CareBridge-Style Interactive Drama Sandbox -->
-      <div class="brutalist-card" id="genz-sandbox-panel">
-        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
-          <span class="sticky-tag pink">
-            <i class="fa-solid fa-wand-magic-sparkles"></i> DRAMA SANDBOX
-          </span>
-          <span class="pill-badge" style="background: var(--accent-lime);">1-CLICK</span>
-        </div>
-        <div class="sandbox-action-buttons">
-          <button class="btn-brutalist btn-mini btn-danger sandbox-btn" onclick="window.triggerSandboxEvent('DRAMA_FIGHT')">
-            <span>⚡ TRIGGER DRAMA FIGHT</span>
-            <span>+30% DRAMA</span>
-          </button>
-          <button class="btn-brutalist btn-mini btn-lime sandbox-btn" onclick="window.triggerSandboxEvent('SLAY_BOOST')">
-            <span>💅 SLAY STREAK BOOST</span>
-            <span>+100 PTS</span>
-          </button>
-          <button class="btn-brutalist btn-mini sandbox-btn" onclick="window.triggerSandboxEvent('SKILL_ISSUE')">
-            <span>💀 SKILL ISSUE PENALTY</span>
-            <span>-50 PTS</span>
-          </button>
         </div>
       </div>
 

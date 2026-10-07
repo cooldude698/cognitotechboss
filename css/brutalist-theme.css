@@ -1,5 +1,5 @@
 /* ==========================================================================
-   CAREBRIDGE NEO-BRUTALIST DESIGN SYSTEM TOKENS & UTILITIES
+   CAREBRIDGE NEO-BRUTALIST DESIGN SYSTEM (1:1 PIXEL-ACCURATE THEME)
    ========================================================================== */
 
 :root {
@@ -20,10 +20,14 @@
   --accent-yellow: #FEE159;
   --accent-yellow-hover: #fedb38;
   --accent-pink: #FF5C98;
+  --accent-pink-hover: #f43f7f;
   --accent-lavender: #EDE9FE;
   --accent-danger: #FEE2E2;
   --accent-danger-ink: #DC2626;
-  --accent-cyan: #A5F3FC;
+  --accent-green-bg: #DCFCE7;
+  --accent-green-ink: #15803D;
+  --accent-amber-bg: #FEF3C7;
+  --accent-amber-ink: #B45309;
 
   /* Brutalist Geometric Shadow & Border Tokens */
   --border-thick: 2px solid var(--ink-900);
@@ -37,14 +41,14 @@
   --shadow-active: 1px 1px 0px var(--ink-900);
 
   /* Radius Tokens */
-  --radius-sm: 6px;
-  --radius-md: 12px;
-  --radius-lg: 18px;
-  --radius-xl: 24px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
   --radius-pill: 9999px;
 
   /* Typography Stacks */
-  --font-serif: 'Syne', sans-serif;
+  --font-serif: 'Syne', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --font-sans: 'DM Sans', -apple-system, sans-serif;
 }
@@ -58,8 +62,10 @@
 
 body {
   background-color: var(--bg-paper);
-  background-image: radial-gradient(var(--ink-300) 1px, transparent 0);
-  background-size: 24px 24px;
+  background-image: 
+    linear-gradient(to right, rgba(18, 18, 20, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(18, 18, 20, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
   color: var(--ink-900);
   font-family: var(--font-sans);
   min-height: 100vh;
@@ -82,6 +88,20 @@ body {
   border-radius: var(--radius-sm);
 }
 
+/* Iconic Pink Highlighter Box from CareBridge Hero */
+.highlight-pink {
+  background-color: var(--accent-pink);
+  color: var(--ink-900);
+  padding: 0.08em 0.35em;
+  border-radius: 12px;
+  display: inline-block;
+  border: 2px solid var(--ink-900);
+  box-shadow: 3px 3px 0px var(--ink-900);
+  transform: rotate(-1.5deg);
+  position: relative;
+  line-height: 1.1;
+}
+
 /* Brutalist Reusable Components */
 .brutalist-card {
   background: var(--bg-card);
@@ -98,6 +118,17 @@ body {
   box-shadow: var(--shadow-hover);
 }
 
+/* CareBridge Big Canvas Card */
+.carebridge-canvas-card {
+  background: var(--bg-card);
+  border: var(--border-thick);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  padding: 2.25rem;
+  position: relative;
+  overflow: hidden;
+}
+
 /* Brutalist Button Styles */
 .btn-brutalist {
   display: inline-flex;
@@ -105,11 +136,11 @@ body {
   justify-content: center;
   gap: 0.5rem;
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  padding: 0.6rem 1.2rem;
+  letter-spacing: 0.03em;
+  padding: 0.65rem 1.35rem;
   border: var(--border-thick);
   border-radius: var(--radius-pill);
   box-shadow: var(--shadow-sm);
@@ -148,10 +179,10 @@ body {
 
 .btn-pink {
   background: var(--accent-pink);
-  color: #fff;
+  color: var(--ink-900);
 }
 .btn-pink:hover {
-  background: #f43f7f;
+  background: var(--accent-pink-hover);
 }
 
 .btn-danger {
@@ -162,28 +193,37 @@ body {
   background: #fca5a5;
 }
 
+.btn-ink {
+  background: var(--ink-900);
+  color: #ffffff;
+}
+.btn-ink:hover {
+  background: var(--ink-700);
+}
+
 /* CareBridge Tilted Sticky Badges */
 .sticky-tag {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  padding: 0.35rem 0.85rem;
+  padding: 0.4rem 0.95rem;
   border: var(--border-thick);
   border-radius: var(--radius-pill);
   font-family: var(--font-mono);
   font-size: 0.75rem;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   box-shadow: var(--shadow-sm);
-  background: #fff;
+  background: #ffffff;
+  color: var(--ink-900);
 }
 
 .sticky-tag.rotate-left {
-  transform: rotate(-2deg);
+  transform: rotate(-3deg);
 }
 .sticky-tag.rotate-right {
-  transform: rotate(2deg);
+  transform: rotate(2.5deg);
 }
 .sticky-tag.lime {
   background: var(--accent-lime);
@@ -193,7 +233,7 @@ body {
 }
 .sticky-tag.pink {
   background: var(--accent-pink);
-  color: #fff;
+  color: var(--ink-900);
 }
 .sticky-tag.lavender {
   background: var(--accent-lavender);
@@ -209,10 +249,129 @@ body {
   align-items: center;
   gap: 0.25rem;
   font-family: var(--font-mono);
-  font-size: 0.7rem;
-  font-weight: 700;
-  padding: 0.2rem 0.55rem;
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 0.22rem 0.6rem;
   border-radius: var(--radius-pill);
   border: var(--border-subtle);
-  background: #fff;
+  background: #ffffff;
+  color: var(--ink-900);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+/* CareBridge Interactive Sandbox Layout */
+.sandbox-hero-box {
+  background: #ffffff;
+  border: var(--border-thick);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.sandbox-hero-header {
+  background: var(--accent-lime);
+  border-bottom: var(--border-thick);
+  padding: 1rem 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.sandbox-hero-body {
+  background: var(--bg-paper-alt);
+  padding: 1.75rem;
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 1.75rem;
+}
+
+@media (max-width: 992px) {
+  .sandbox-hero-body {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Sandbox Simulated Event Buttons */
+.sandbox-event-btn {
+  width: 100%;
+  text-align: left;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-md);
+  border: var(--border-thick);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  margin-bottom: 0.75rem;
+}
+
+.sandbox-event-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: var(--shadow-hover);
+}
+
+.sandbox-event-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: var(--shadow-active);
+}
+
+.sandbox-event-btn.event-red {
+  background: var(--accent-danger);
+}
+.sandbox-event-btn.event-green {
+  background: var(--accent-green-bg);
+}
+.sandbox-event-btn.event-amber {
+  background: var(--accent-amber-bg);
+}
+
+.sandbox-event-btn-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.sandbox-event-btn-sub {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--ink-700);
+  line-height: 1.35;
+}
+
+/* CareBridge Fanned-Out Cards Showcase */
+.fan-cards-showcase {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 2.5rem 0 1rem;
+  overflow: visible;
+}
+
+.fan-card {
+  width: 210px;
+  background: #ffffff;
+  border: var(--border-thick);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.25s ease, z-index 0.25s ease, box-shadow 0.25s ease;
+  margin: 0 -22px;
+  cursor: pointer;
+}
+
+.fan-card:hover {
+  transform: translateY(-12px) scale(1.06) rotate(0deg) !important;
+  z-index: 50 !important;
+  box-shadow: var(--shadow-lg);
 }
