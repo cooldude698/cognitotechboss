@@ -1,112 +1,98 @@
 # 👤 TASK ASSIGNMENT: AMAN
-### Role: Core Architecture, State Engine & Contestant Management
+### Role: Contestants, Live Leaderboard, Danger Zone & Eviction Engine
 **Project:** Big Boss Command Center (`cognitotechboss`)  
 **Teammate:** Aman  
 **Time Limit:** 45 Minutes  
+**Reference Architecture:** [BRAIN.md](file:///Users/cooldude69/Desktop/cognito/BRAIN.md) & [SCHEMA.md](file:///Users/cooldude69/Desktop/cognito/SCHEMA.md)
 
 ---
 
 ## 🎯 MANDATORY REQUIREMENTS OWNED (500 pts)
 
-You are the owner of the following **5 Mandatory Requirements**:
-1. ✅ **Requirement #1: Contestant Management** (8+ contestants, name, team, points, status, avatar emoji)
-2. ✅ **Requirement #5: Captaincy** (Assign/change House Captain, crown badge, auto-immunity)
-3. ✅ **Requirement #6: Nominations** (Nominate non-immune contestants for eviction)
-4. ✅ **Requirement #7: Immunity** (Grant/revoke shield; hard-lock validation preventing nomination)
-5. ✅ **Requirement #8: Danger Zone** (Display all nominated contestants in dedicated high-contrast alarm panel)
-
-Plus **Bonus Feature**:
-- ⚡ **"Load Demo State / Chaos Button"** inside `state.js` for instant evaluator 1-click verification!
+You own the following **5 Mandatory Requirements**:
+1. ✅ **Requirement #1: Contestant Management** (8+ contestants with Name, Team, Points, Status, Avatar, Vibe)
+2. ✅ **Requirement #2: Live Leaderboard** (Dynamic auto-sort descending by points, Rank 1-8 badges)
+3. ✅ **Requirement #5: Captaincy** (Assign/change House Captain, crown badge, auto-immunity)
+4. ✅ **Requirement #6 & #7: Nominations & Immunity** (Immunity shield; hard-lock blocking nomination of immune/captain contestants)
+5. ✅ **Requirement #8 & #12: Danger Zone & Eviction** (Display nominated housemates, execute eviction with Thanos-snap purge)
 
 ---
 
-## 📁 FILES ASSIGNED TO AMAN
+## 📁 FILES OWNED BY AMAN
 
 | File | Responsibility |
 |---|---|
-| `js/state.js` | Single source of truth: contestants list, captainId, state mutation helpers, localStorage sync, demo seeder |
-| `js/contestants.js` | Contestant card rendering, add contestant modal, team badges, status badges |
-| `js/nominations.js` | Nomination modal/trigger, immunity check validation, Danger Zone card renderer |
-| `css/variables.css` | Color tokens (`--bg-primary`, `--neon-blue`, `--neon-red`, etc.), fonts, borders |
-| `css/base.css` | Global reset, body styling, cyberpunk background styles |
+| `css/contestants.css` | Contestant card styling, rank badges, Danger Zone container, eviction snap VFX |
+| `js/contestants.js` | Renders 8+ cards into `#contestants-grid`, handles `+`/`-` point adjustments, Captain toggle, Immunity toggle |
+| `js/leaderboard.js` | Renders into `#leaderboard-list`, sorts active contestants by points descending (`b.points - a.points`) |
+| `js/eviction.js` | Handles nominations, renders into `#danger-zone-container`, executes eviction ceremony and updates `AppState.evictedList` |
 
 ---
 
-## 🛠️ DETAILED IMPLEMENTATION CHECKLIST
+## 🔌 FROZEN HTML TARGET CONTAINER IDs
 
-### 1. `css/variables.css` & `css/base.css`
-- [ ] Define CSS custom properties:
-  - `--bg-primary: #030712;`
-  - `--bg-secondary: #0d1117;`
-  - `--bg-card: #111827;`
-  - `--neon-blue: #00f5ff;`
-  - `--neon-pink: #ff00a0;`
-  - `--neon-green: #00ff88;`
-  - `--neon-red: #ff003c;`
-  - `--neon-gold: #ffd700;`
-- [ ] Base typography (`Orbitron` for headings, `Inter` for body).
+Your scripts render directly into these pre-allocated containers created by Vedesh in `index.html`:
+- `#contestants-grid` — Grid of all 8+ contestant cards
+- `#leaderboard-list` — Real-time sorted ranking list
+- `#danger-zone-container` — High-contrast crimson card grid of all nominated contestants
+- `#evicted-graveyard` — Archive of eliminated housemates
 
-### 2. `js/state.js` (The Backbone)
-- [ ] Initialize `state` object with:
-  - `contestants`: Pre-seed **8+ contestants** (e.g. Vedesh, Priya, Marcus, Elena, Dev, Sarah, Liam, Aisha) with attributes:
-    ```js
-    {
-      id: "c_001",
-      name: "Vedesh",
-      team: "Alpha",
-      points: 450,
-      status: "active", // "active" | "immune" | "nominated" | "evicted"
-      isCaptain: false,
-      avatar: "🦁",
-      vibeCheck: "Slay",
-      isSus: false
-    }
-    ```
-  - `captainId`: ID of active captain.
-  - `activityFeed`: Array of log events.
-- [ ] Provide mutation functions:
-  - `updateContestant(id, changes)`
-  - `setCaptain(id)`: Removes crown from old captain, gives crown + immunity to new captain.
-  - `grantImmunity(id)`: Sets status to `"immune"`.
-  - `revokeImmunity(id)`: Reverts to `"active"`.
-  - `nominateContestant(id, reason)`: **Validates that contestant is NOT immune or captain**; if valid, sets status to `"nominated"`.
-  - `loadDemoState()`: Pre-fills 8 contestants with scores, 1 captain, 2 nominees, ready for evaluators.
-- [ ] Add `saveState()` & `loadState()` using `localStorage`.
+---
 
-### 3. `js/contestants.js`
-- [ ] `renderContestants()`: Builds interactive cards for each active contestant.
-- [ ] Displays Avatar, Name, Team badge (`Team Alpha` / `Team Beta`), Points, Status badge (`ACTIVE`, `IMMUNE 🛡️`, `CAPTAIN 👑`).
-- [ ] Action buttons on card:
-  - **Crown Captain** (calls `setCaptain(id)`)
-  - **Shield / Immunity** toggle (calls `grantImmunity(id)` or `revokeImmunity(id)`)
-  - **Nominate** button (disabled if immune!)
-- [ ] Modal to register a brand new contestant (`name`, `team`, `avatar`).
+## 🛠️ STEP-BY-STEP IMPLEMENTATION CHECKLIST
 
-### 4. `js/nominations.js` & Danger Zone
-- [ ] `renderDangerZone()`: Filters contestants where `status === "nominated"`.
-- [ ] Shows red pulsating cards in the Danger Zone section.
-- [ ] Each Danger Zone card has:
-  - Nominee Name + Points
-  - Nomination reason
-  - "Evict" trigger button (calls Vedesh's eviction handler in `eviction.js`).
-- [ ] Prevents nomination if contestant is currently immune (shows warning toast: *"Contestant has Immunity Shield!"*).
+### 1. `js/contestants.js` (Roster & Card Actions)
+- [ ] Read `window.AppState.contestants`.
+- [ ] For each active contestant, render a cyberpunk card inside `#contestants-grid` showing:
+  - Avatar emoji (🦁, ⚡, 🦊, 🐉, etc.)
+  - Name and Team badge (`Alpha` / `Beta`)
+  - Current Points counter
+  - Status badge: `ACTIVE`, `IMMUNE 🛡️`, `CAPTAIN 👑`, or `NOMINATED ⚠️`
+  - Vibe tag: `Slay 💅`, `Mid 😐`, `L Bozo 💀`, `NPC 🤖`
+- [ ] Implement action buttons on each card:
+  - `+10` / `+50` / `-10` / `-50` points ➔ calls `window.dispatchStateChange("POINTS_MODIFIED", { contestantId, delta, reason })`
+  - **Crown Captain** ➔ calls `window.dispatchStateChange("CAPTAIN_ASSIGNED", { contestantId })`
+  - **Shield / Immunity** ➔ calls `window.dispatchStateChange("IMMUNITY_TOGGLED", { contestantId })`
+  - **Nominate** ➔ calls `window.dispatchStateChange("CONTESTANT_NOMINATED", { contestantId, reason })` (DISABLED if status === "immune" or isCaptain === true!)
+
+### 2. `js/leaderboard.js` (Live Dynamic Rankings)
+- [ ] Listen to `window.addEventListener("app:state-changed", renderLeaderboard)`.
+- [ ] Filter active contestants (`status !== "evicted"`).
+- [ ] Sort descending by points: `contestants.sort((a, b) => b.points - a.points)`.
+- [ ] Render into `#leaderboard-list` with podium medal accents:
+  - 🥇 Rank 1: Gold Crown + Glowing border
+  - 🥈 Rank 2: Silver medal
+  - 🥉 Rank 3: Bronze medal
+  - Ranks 4–8: Standard badge
+- [ ] Smooth CSS transition on rank swaps.
+
+### 3. `js/eviction.js` (Danger Zone & Thanos Eviction Ceremony)
+- [ ] Render nominated contestants into `#danger-zone-container`.
+- [ ] Display reason for nomination and an **"Evict Contestant"** button.
+- [ ] On Evict click:
+  - Play `window.playSfx("snap")`
+  - Trigger screen shake (`document.body.classList.add("screen-shake")`)
+  - Dispatch: `window.dispatchStateChange("CONTESTANT_EVICTED", { contestantId })`
+  - Purge contestant from active leaderboard and move them to `#evicted-graveyard`.
 
 ---
 
 ## 🧪 HOW TO TEST YOUR WORK
-1. Open the app — verify **8+ contestants** render on the grid with avatars, teams, and points.
-2. Click **Crown Captain** on a contestant — verify only 1 contestant has the gold crown.
-3. Grant **Immunity** to a contestant — verify the shield badge appears.
-4. Try to **Nominate** the immune contestant — verify it is blocked.
-5. Nominate a non-immune contestant — verify they immediately appear in the **Danger Zone** with a red pulse.
+1. Open `index.html` — verify 8+ contestants appear in `#contestants-grid`.
+2. Click `+50` on any contestant — check that `#leaderboard-list` re-sorts instantly.
+3. Crown a captain — check that the previous captain loses their crown and the new captain gets immunity.
+4. Try to nominate an immune contestant — verify the button is disabled and blocked.
+5. Nominate an active contestant — verify they appear in `#danger-zone-container` with red danger pulse.
+6. Click Evict on a nominee — verify they disappear from the active grid and leaderboard.
 
 ---
 
 ## 🚀 GIT WORKFLOW FOR AMAN
 ```bash
 git pull origin main
-# Work on: css/variables.css, css/base.css, js/state.js, js/contestants.js, js/nominations.js
-git add css/variables.css css/base.css js/state.js js/contestants.js js/nominations.js
-git commit -m "feat(aman): implement state engine, contestant cards, captaincy, immunity and danger zone"
+# Work only on your assigned files:
+# css/contestants.css, js/contestants.js, js/leaderboard.js, js/eviction.js
+git add css/contestants.css js/contestants.js js/leaderboard.js js/eviction.js
+git commit -m "feat(aman): implement contestant grid, leaderboard, immunity and eviction engine"
 git push origin main
 ```

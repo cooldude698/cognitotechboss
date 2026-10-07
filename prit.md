@@ -1,109 +1,113 @@
-# 👤 TASK ASSIGNMENT: PRIT
-### Role: Competition Engine, Points, Leaderboard & Task Management
+# 👤 TASK ASSIGNMENT: PRIT (PRITH)
+### Role: Task Management, Countdown Engine, House Telemetry & Gen-Z Sandbox
 **Project:** Big Boss Command Center (`cognitotechboss`)  
-**Teammate:** Prit  
+**Teammate:** Prit (Prith)  
 **Time Limit:** 45 Minutes  
+**Reference Architecture:** [BRAIN.md](file:///Users/cooldude69/Desktop/cognito/BRAIN.md) & [SCHEMA.md](file:///Users/cooldude69/Desktop/cognito/SCHEMA.md)
 
 ---
 
 ## 🎯 MANDATORY REQUIREMENTS OWNED (400 pts)
 
-You are the owner of the following **4 Mandatory Requirements**:
-1. ✅ **Requirement #2: Live Leaderboard** (Auto-sorting ranks by points, medals 🥇🥈🥉, smooth animated transitions)
-2. ✅ **Requirement #3: Task Management** (Create house tasks, assign to contestant or all, mark Complete, auto-credit points)
-3. ✅ **Requirement #4: Point System** (`+` and `-` point delta buttons, custom points with reason tag, point history log)
-4. ✅ **Requirement #11: House Statistics** (Live stat metrics: MVP Top Scorer, Lowest Scorer, Completed Tasks, Active Nominees, Charts)
+You own the following **4 Mandatory Requirements**:
+1. ✅ **Requirement #3: Task Management** (Create tasks, assign to contestant/team/all, mark Complete, auto-reward points)
+2. ✅ **Requirement #4: Point System Telemetry** (Real-time delta tracking, point logs, audit updates)
+3. ✅ **Requirement #10: Task Timer** (Precision countdown: Start, Pause, Reset, `<10s` panic mode, alarm audio)
+4. ✅ **Requirement #11: House Statistics** (Live telemetry: Top Scorer MVP, Tasks completed, Nominees, Chart.js graphs)
 
-Plus **Bonus Feature**:
-- 🗳️ **Public Audience Save Poll Simulator** (Live voting percentage bars inside Danger Zone!)
+Plus **Bonus "Wow Factor" Features**:
+- 🎮 **Gen-Z Chaos Sandbox** (Interactive event triggers: "Trigger Drama Fight", "Slay Boost", "Skill Issue Penalty")
+- 📊 **Chart.js Live Points Visualization** (Dynamic bar chart of contestant score distribution)
 
 ---
 
-## 📁 FILES ASSIGNED TO PRIT
+## 📁 FILES OWNED BY PRIT
 
 | File | Responsibility |
 |---|---|
-| `js/leaderboard.js` | Sorted leaderboard rendering, dynamic re-ordering on point change, Rank 1/2/3 podium badges |
-| `js/points.js` | `addPoints(id, amount, reason)` and `deductPoints(id, amount, reason)` logic, floating point animation |
-| `js/tasks.js` | Task CRUD, task assignment, status toggling (`pending` ➔ `completed`), automatic point reward |
-| `js/stats.js` | Live statistics calculation, MVP finder, Chart.js points and tasks breakdown |
-| `css/components.css` | Styling for Leaderboard rows, task checklist items, point pills, stat cards |
+| `css/dashboard-panels.css` | Task board cards, countdown timer HUD, stat card metrics, Chart.js container, sandbox panel |
+| `js/tasks.js` | Renders tasks into `#tasks-list`, handles "Complete Task", auto-awards points to assignees |
+| `js/timer.js` | Countdown timer mounted to `#task-timer-display`, handles Start/Pause/Reset, triggers panic mode `<10s` |
+| `js/stats.js` | Computes live metrics inside `#house-stats-panel`, renders Chart.js into `#charts-canvas` |
+| `js/genZ.js` | Interactive drama sandbox buttons (Fight, Slay, Ratio) for live evaluator demo excitement |
 
 ---
 
-## 🛠️ DETAILED IMPLEMENTATION CHECKLIST
+## 🔌 FROZEN HTML TARGET CONTAINER IDs
 
-### 1. `js/points.js` (Point System Engine)
-- [ ] Implement `modifyPoints(contestantId, delta, reason)`:
-  - Updates contestant's `points` in `state.contestants`.
-  - Enforces minimum points floor (e.g. 0 points).
-  - Triggers floating floating indicator (`+50` in green, `-20` in red) at the card position.
-  - Logs the event to `state.activityFeed`: `"[10:04] Aman awarded +50 pts to Vedesh (Reason: Cleaned Kitchen)"`.
-  - Re-triggers `renderLeaderboard()` and `renderStats()`.
-- [ ] Provide quick-click buttons on each contestant card:
-  - `+10` (Quick Bounty)
-  - `+50` (Major Task)
-  - `-10` (Minor Penalty)
-  - `-50` (Severe Infraction)
-- [ ] Provide a "Custom Points Modal" for Big Boss with custom number input + text reason.
+Your scripts render directly into these pre-allocated containers created by Vedesh in `index.html`:
+- `#tasks-list` — List of all active/completed tasks
+- `#task-timer-display` — Large digital countdown HUD (`MM:SS`)
+- `#timer-controls` — Start, Pause, Reset, and preset duration buttons
+- `#house-stats-panel` — Summary metric cards (MVP, Completed tasks, Drama level)
+- `#charts-canvas` — `<canvas>` element for Chart.js points chart
+- `#genz-sandbox-panel` — Interactive chaos buttons
 
-### 2. `js/leaderboard.js` (Live Leaderboard)
-- [ ] `renderLeaderboard()`:
-  - Filters out evicted contestants (`status !== "evicted"`).
-  - Sorts active contestants descending: `b.points - a.points`.
-  - Renders top ranks with medals:
-    - **Rank 1:** 🥇 Gold + Glowing border
-    - **Rank 2:** 🥈 Silver
-    - **Rank 3:** 🥉 Bronze
-    - **Other:** #4, #5, #6, etc.
-  - Displays: Rank number, Avatar, Contestant Name, Team tag, Captain crown if captain, and Total Points.
-  - Smooth animation or transition when ranks swap positions.
+---
 
-### 3. `js/tasks.js` (Task Management)
-- [ ] Initialize pre-seeded tasks in `state.tasks`:
-  - *"Refactor Core Legacy Backend"* (Point Value: 100, Assigned to: Vedesh)
-  - *"Survive 24-Hour Hackathon Shift"* (Point Value: 50, Assigned to: All)
-  - *"Eliminate Memory Leak in Production"* (Point Value: 80, Assigned to: Priya)
-- [ ] `renderTasks()`:
-  - Shows task card with: Title, Description, Point Bounty, Assignee name/badge, and Status badge (`Pending` / `Completed`).
-  - Filter tabs: `All`, `Pending`, `Completed`.
-- [ ] `completeTask(taskId)`:
-  - Marks status as `"completed"`.
-  - **Automatically adds points** to the assigned contestant(s) via `modifyPoints`.
-  - Logs task completion to Activity Feed.
-- [ ] "New Task" form to create and assign custom house tasks.
+## 🛠️ STEP-BY-STEP IMPLEMENTATION CHECKLIST
 
-### 4. `js/stats.js` (House Statistics Dashboard)
-- [ ] Live summary stat cards:
-  - 👑 **Current House Captain**
-  - 🌟 **Top Scorer (MVP):** Contestant with highest points
-  - 🔻 **Lowest Scorer:** Contestant with lowest points
-  - ✅ **Tasks Completed:** `X / Y completed`
-  - ⚠️ **Total Nominees:** Count of contestants in Danger Zone
-  - 🚪 **Total Evicted:** Count of eliminated housemates
-- [ ] Integrate **Chart.js** (CDN included in HTML):
-  - Points distribution bar chart across all active contestants.
+### 1. `js/tasks.js` (Task Pipeline)
+- [ ] Read `window.AppState.tasks`.
+- [ ] Render task items into `#tasks-list`:
+  - Title, point bounty (+50, +100), Assigned To badge (`All` or Contestant name)
+  - Status badge: `PENDING ⏳` vs `COMPLETED ✅`
+  - Action button: **"Mark Done"**
+- [ ] On "Mark Done":
+  - Mark task status as `"completed"`.
+  - Dispatch: `window.dispatchStateChange("TASK_COMPLETED", { taskId, pointReward, assignedTo })`
+  - Award points automatically to assigned contestant(s).
+  - Play `window.playSfx("beep")`.
+- [ ] Provide quick modal/form to create a new task with custom title, point value, and assignee.
 
-### 5. 🗳️ Bonus: Audience Save Poll
-- [ ] For each nominated contestant, show a live public vote bar:
-  - Simulates audience vote percentages (*"Alex: 58% | Sarah: 42%"*).
-  - Include a `+ Vote` button for user interactivity.
+### 2. `js/timer.js` (Countdown Clock Engine)
+- [ ] Read `window.AppState.timer`.
+- [ ] Render formatted time (`MM:SS`) into `#task-timer-display`.
+- [ ] Controls:
+  - **Start:** Sets `timer.isRunning = true`, starts 1-second `setInterval`.
+  - **Pause:** Clears interval, sets `timer.isRunning = false`.
+  - **Reset:** Resets `timer.remaining = timer.totalDuration`.
+  - **Presets:** 5 Min (`300s`), 15 Min (`900s`), 30 Min (`1800s`).
+- [ ] Panic Mode: When `remaining <= 10` seconds, add CSS class `.timer-panic` (flashing red).
+- [ ] When `remaining === 0`:
+  - Play alarm sound: `window.playSfx("alarm")`.
+  - Display "TIME'S UP" banner overlay.
+
+### 3. `js/stats.js` (Live Telemetry & Chart.js)
+- [ ] Compute and render metrics into `#house-stats-panel`:
+  - 🌟 **Top Scorer (MVP):** Name + highest points
+  - 🔻 **Lowest Scorer:** Name + lowest points
+  - ✅ **Tasks Progress:** `X / Y completed`
+  - ⚠️ **Nominees at Risk:** Current count in Danger Zone
+  - 🎭 **Drama Level:** Live gauge (0–100%)
+- [ ] Initialize **Chart.js** bar chart on `#charts-canvas`:
+  - Labels: Active contestant names
+  - Data: Current point totals
+  - Auto-updates on `window.addEventListener("app:state-changed", updateChart)`.
+
+### 4. `js/genZ.js` (Bonus: Live Chaos Sandbox)
+- [ ] Provide instant click buttons inside `#genz-sandbox-panel`:
+  - 🥊 **"Trigger House Fight":** Deducts 30 points from 2 rivals, spikes drama level by +20%, plays Vine Boom SFX.
+  - 💅 **"Slay Boost":** Awards +50 points to the Captain.
+  - 💀 **"Skill Issue Penalty":** Deducts 20 points from the lowest scorer.
 
 ---
 
 ## 🧪 HOW TO TEST YOUR WORK
-1. Click `+50` on the 3rd-ranked contestant — verify their points increase and their card moves up the Leaderboard immediately.
-2. Complete a task — verify the assigned contestant receives the reward points automatically.
-3. Check the **House Statistics** bar — verify Top Scorer and Task counts reflect real data.
-4. Add custom points with a reason — verify the reason appears in the activity feed.
+1. Open `index.html` — verify pre-seeded tasks appear in `#tasks-list`.
+2. Click **Mark Done** on a task — verify points automatically credit to the assigned contestant and update on the leaderboard.
+3. Click **Start** on the timer — watch it count down; set to 5 seconds and verify the red panic flash and alarm trigger at 0.
+4. Check `#house-stats-panel` and `#charts-canvas` — verify bars and MVP reflect actual live points.
+5. Click **Trigger House Fight** in the Sandbox — verify drama level spikes and sound plays.
 
 ---
 
 ## 🚀 GIT WORKFLOW FOR PRIT
 ```bash
 git pull origin main
-# Work on: js/points.js, js/leaderboard.js, js/tasks.js, js/stats.js, css/components.css
-git add js/points.js js/leaderboard.js js/tasks.js js/stats.js css/components.css
-git commit -m "feat(prit): implement live leaderboard, point system, task management and house statistics"
+# Work only on your assigned files:
+# css/dashboard-panels.css, js/tasks.js, js/timer.js, js/stats.js, js/genZ.js
+git add css/dashboard-panels.css js/tasks.js js/timer.js js/stats.js js/genZ.js
+git commit -m "feat(prit): implement task board, countdown timer, stats telemetry and GenZ sandbox"
 git push origin main
 ```

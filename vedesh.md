@@ -1,112 +1,124 @@
 # 👤 TASK ASSIGNMENT: VEDESH
-### Role: Big Boss Control Room, Eviction Engine, Timer & VFX/Audio Experience
+### Role: Lead Architect, Layout Shell, State Store & Audio Broadcast Engine
 **Project:** Big Boss Command Center (`cognitotechboss`)  
 **Teammate:** Vedesh  
 **Time Limit:** 45 Minutes  
+**Reference Architecture:** [BRAIN.md](file:///Users/cooldude69/Desktop/cognito/BRAIN.md) & [SCHEMA.md](file:///Users/cooldude69/Desktop/cognito/SCHEMA.md)
 
 ---
 
 ## 🎯 MANDATORY REQUIREMENTS OWNED (300 pts)
 
-You are the owner of the following **3 Mandatory Requirements**:
-1. ✅ **Requirement #9: Big Boss Announcement** (Trigger/display broadcast banner & feed, CRT glitch/typewriter effect)
-2. ✅ **Requirement #10: Task Timer** (Precision countdown timer: Start, Pause, Reset, preset times, alarm siren)
-3. ✅ **Requirement #12: Eviction** (Evict contestants, purge from active house & leaderboard, move to "Hall of Shame")
+You own the following **3 Mandatory Requirements**:
+1. ✅ **Requirement #9: Big Boss Announcement System** (Broadcast banner, typewriter text reveal, live audio broadcast)
+2. ✅ **Application Shell & Container Layout** (3-column command center grid, frozen container IDs for teammates)
+3. ✅ **Reactive State Machine & Audio Engine** (`window.AppState`, `dispatchStateChange`, Web Audio synthesizer)
 
 Plus **Bonus "Wow Factor" Features**:
-- 🤖 **Big Boss Robotic AI Voice** (Native `window.speechSynthesis` text-to-speech)
-- 🔊 **Web Audio Procedural Sound Engine** (Airhorn, Eviction Gavel, Danger Siren, Timer Buzzer)
-- 📹 **CCTV Multi-Cam Surveillance Grid** (4-channel retro CRT camera switcher)
-- 💥 **Thanos Snap Particle Disintegration & Screen Shake** on eviction!
+- 🤖 **Big Boss AI Robotic Voice Synthesizer** (Native `window.speechSynthesis` text-to-speech)
+- 🔊 **Procedural Web Audio SFX Generator** (`window.playSfx`: beep, airhorn, vineboom, alarm, snap — zero 404 audio errors!)
+- 🎭 **Drama-O-Meter & Marquee Ticker Tape** across the command center header
+- ⚡ **1-Click "Load Demo State" Button** for instant evaluator review!
 
 ---
 
-## 📁 FILES ASSIGNED TO VEDESH
+## 📁 FILES OWNED BY VEDESH
 
 | File | Responsibility |
 |---|---|
-| `index.html` | Master HTML skeleton, 3-column command center layout, CDN library links |
-| `js/announcements.js` | Big Boss announcement broadcaster, ticker marquee, robotic voice synthesizer |
-| `js/timer.js` | Countdown clock logic, circular SVG progress ring, audio warning on zero |
-| `js/eviction.js` | Eviction execution, removal from active roster, "Evicted Hall of Shame" section |
-| `js/sounds.js` | Web Audio API procedural sound engine (zero external file failures) |
-| `js/effects.js` | Matrix rain background canvas, screen shake, particle bursts, CRT scanlines |
-| `js/app.js` | Master init, event listener attachments, tab navigation |
-| `css/layout.css` | Command Center HUD grid, 3-column layout, responsive panels |
-| `css/animations.css` | Glitch text, pulsing danger borders, crown drops, Thanos snap keyframes |
+| `index.html` | Master HTML skeleton, 3-column layout, frozen teammate container IDs, CDN script links |
+| `css/brutalist-theme.css` | Cyberpunk/Brutalist design tokens, HUD scanlines, neon glows, button classes |
+| `js/state.js` | Single source of truth (`window.AppState`), `window.dispatchStateChange`, localStorage sync, demo data seeder |
+| `js/sounds.js` | Procedural Web Audio API sound generator (`window.playSfx`) |
+| `js/announcements.js` | Big Boss broadcast banner, typewriter text reveal, speech synthesis voice broadcaster |
 
 ---
 
-## 🛠️ DETAILED IMPLEMENTATION CHECKLIST
+## 🔌 FROZEN HTML TARGET CONTAINER IDs TO PROVIDE
 
-### 1. `index.html` (The Master Shell)
-- [ ] Connect all CDNs in `<head>`:
-  - Font Awesome 6.4.0
-  - Orbitron & Inter Google Fonts
-  - GSAP (`gsap.min.js`)
+In `index.html`, you provide these exact target IDs for Aman and Prit to mount their components:
+- `#contestants-grid` — For Aman's contestant cards
+- `#leaderboard-list` — For Aman's live leaderboard
+- `#danger-zone-container` — For Aman's nominated cards
+- `#evicted-graveyard` — For Aman's evicted hall of fame
+- `#tasks-list` — For Prit's task management items
+- `#task-timer-display` & `#timer-controls` — For Prit's countdown clock
+- `#house-stats-panel` & `#charts-canvas` — For Prit's telemetry and Chart.js
+- `#announcement-banner` & `#announcement-ticker` — For your announcement broadcasts
+- `#drama-meter-bar` — For your drama gauge
+
+---
+
+## 🛠️ STEP-BY-STEP IMPLEMENTATION CHECKLIST
+
+### 1. `index.html` (The Command Center Shell)
+- [ ] Connect CDNs:
+  - Font Awesome (`all.min.css`)
+  - Google Fonts (`Orbitron`, `Inter`)
   - Chart.js (`chart.umd.min.js`)
-  - vanilla-tilt.js (`vanilla-tilt.min.js`)
+  - GSAP (`gsap.min.js`)
+- [ ] Connect teammate stylesheets:
+  - `<link rel="stylesheet" href="css/brutalist-theme.css">`
+  - `<link rel="stylesheet" href="css/contestants.css">`
+  - `<link rel="stylesheet" href="css/dashboard-panels.css">`
 - [ ] 3-Column Command Center layout:
-  - **Left Sidebar:** Big Boss Logo, Navigation tabs (Dashboard, Contestants, Tasks, Danger Zone, CCTV, Evicted), Quick Stats.
-  - **Center Panel:** Active view (Contestant Grid / Danger Zone / Tasks / CCTV).
-  - **Right Panel:** Live Leaderboard + Countdown Timer + Announcement Feed + Activity Log.
+  - **Header:** Big Boss Eye Logo, Live Ticker, Drama-O-Meter, "⚡ Load Demo State" button, Sound Mute toggle.
+  - **Left Column:** Contestant Grid (`#contestants-grid`) + Add Contestant Modal.
+  - **Center Column:** Live Leaderboard (`#leaderboard-list`) + Danger Zone (`#danger-zone-container`) + Evicted Archive (`#evicted-graveyard`).
+  - **Right Column:** Task Pipeline (`#tasks-list`) + Countdown Timer (`#task-timer-display`) + Stats & Chart (`#charts-canvas`) + Gen-Z Sandbox.
+- [ ] Script tags at bottom:
+  - `state.js`, `sounds.js`, `announcements.js`, `contestants.js`, `leaderboard.js`, `eviction.js`, `tasks.js`, `timer.js`, `stats.js`, `genZ.js`.
 
-### 2. `js/announcements.js` (Big Boss Voice & Broadcast)
-- [ ] Big Boss announcement input box with a glowing **"📢 Broadcast Decree"** button.
-- [ ] Displays animated banner overlay + ticker tape across the top of the HUD.
-- [ ] **AI Robotic Voice:**
-  ```js
-  function speakBigBoss(text) {
-    if (!window.speechSynthesis) return;
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.pitch = 0.7; // Deep authoritative tone
+### 2. `js/state.js` (Reactive State Bus)
+- [ ] Initialize `window.AppState` following [SCHEMA.md](file:///Users/cooldude69/Desktop/cognito/SCHEMA.md):
+  - Pre-seed 8+ contestants (Vedesh, Priya, Marcus, Elena, Dev, Sarah, Liam, Aisha) with valid scores.
+  - Set `captainId`, `nominees`, `tasks`, `timer`, `dramaLevel`.
+- [ ] Implement `window.dispatchStateChange(eventType, payload)`:
+  - Updates `window.AppState` based on `eventType`.
+  - Saves to `localStorage.setItem("BIG_BOSS_STATE", JSON.stringify(window.AppState))`.
+  - Dispatches: `window.dispatchEvent(new CustomEvent("app:state-changed", { detail: { eventType, payload } }))`.
+- [ ] Implement `loadDemoState()`:
+  - Instantly populates rich demo data in 0.1s so evaluators can test immediately without typing.
+
+### 3. `js/sounds.js` (Zero-Failure Web Audio API)
+- [ ] Create procedural audio generator on `window.playSfx(type)`:
+  - `"beep"`: Quick high-pitch sine wave (800Hz, 0.1s).
+  - `"airhorn"`: Modulated saw-wave fanfare (new Captain).
+  - `"vineboom"`: Low-frequency dramatic bass drop (55Hz with distortion).
+  - `"alarm"`: Oscillating square wave siren (440Hz ➔ 880Hz).
+  - `"snap"`: White noise burst with decay (Thanos snap eviction).
+- [ ] Includes `window.toggleSound()` for the mute button.
+
+### 4. `js/announcements.js` (Big Boss Voice & Broadcast)
+- [ ] Input box for Big Boss decree + **"📢 Broadcast Decree"** button.
+- [ ] Renders into `#announcement-banner` with glowing red border and typewriter reveal.
+- [ ] **Robotic Voice Synthesizer:**
+  ```javascript
+  function speakBigBoss(message) {
+    if (!window.speechSynthesis || window.AppState.settings.soundMuted) return;
+    const utterance = new SpeechSynthesisUtterance(message);
+    utterance.pitch = 0.65; // Deep authoritative Big Boss tone
     utterance.rate = 0.95;
     window.speechSynthesis.speak(utterance);
   }
   ```
-- [ ] Archives past announcements in the Announcement Log.
-
-### 3. `js/timer.js` (Countdown Clock Engine)
-- [ ] State: `duration`, `remaining`, `isRunning`, `intervalId`.
-- [ ] Controls: **Start**, **Pause**, **Reset**.
-- [ ] Quick duration presets: `5 Mins`, `15 Mins`, `30 Mins`.
-- [ ] Visual: Large digital display (`MM:SS`) + circular SVG ring.
-- [ ] Flash screen red and play warning alarm when timer reaches `00:00`.
-
-### 4. `js/eviction.js` (Eviction Lifecycle)
-- [ ] `evictContestant(id)`:
-  - Confirms action via Big Boss confirmation dialog (*"Are you sure you want to evict X?"*).
-  - Triggers **Thanos snap disintegration animation** (card dissolves into particles) + screen shake.
-  - Plays Eviction Gavel sound.
-  - Triggers robotic voice: *"Bigg Boss announces: [Name] has been evicted from the Tech House."*
-  - Updates contestant status to `"evicted"`.
-  - Removes them from active leaderboard.
-  - Adds them to the **"☠️ Evicted Hall of Shame"** archive section with departure timestamp.
-
-### 5. `js/sounds.js` & `js/effects.js` (Sound & VFX)
-- [ ] Procedural sound generation via `AudioContext`:
-  - `playAlarm()` (oscillating siren for nominations/danger)
-  - `playGavel()` (deep thud for evictions)
-  - `playAirhorn()` (fanfare for new Captain)
-  - `playBuzzer()` (timer end)
-- [ ] Canvas Matrix Rain effect running subtly in the background.
-- [ ] 📹 **Simulated CCTV Grid:** 4-quadrant security camera viewer (*CAM 1: Coding Den, CAM 2: Pantry, CAM 3: Confession Room, CAM 4: Danger Cell*) with blinking `● REC` indicator.
 
 ---
 
 ## 🧪 HOW TO TEST YOUR WORK
-1. Enter an announcement like *"Nominations begin now"* and click Broadcast — hear the robotic voice speak and see the announcement banner.
-2. Click **Start** on the timer — verify the countdown decreases; click **Pause** and **Reset**.
-3. In the Danger Zone, click **Evict** on a nominee — verify the disintegration animation plays, screen shakes, and the contestant moves to the Evicted section.
-4. Open the **CCTV Viewer** — verify the 4 simulated camera feeds and scanning lines render smoothly.
+1. Open `index.html` in your browser — verify the 3-column layout, fonts, and dark brutalist styling render properly.
+2. In the console, call `window.playSfx("airhorn")` — hear the procedural audio horn.
+3. Broadcast an announcement — verify the banner updates, ticker scrolls, and robotic voice speaks.
+4. Click the **"⚡ Load Demo State"** button — verify the entire app populates with 8 contestants, 1 captain, 2 nominees, and active tasks in 0.1 seconds.
 
 ---
 
 ## 🚀 GIT WORKFLOW FOR VEDESH
 ```bash
 git pull origin main
-# Work on: index.html, js/announcements.js, js/timer.js, js/eviction.js, js/sounds.js, js/effects.js, js/app.js, css/layout.css, css/animations.css
-git add index.html js/announcements.js js/timer.js js/eviction.js js/sounds.js js/effects.js js/app.js css/layout.css css/animations.css
-git commit -m "feat(vedesh): implement Big Boss announcements, countdown timer, eviction engine, sounds and VFX"
+# Work only on your assigned files:
+# index.html, css/brutalist-theme.css, js/state.js, js/sounds.js, js/announcements.js
+git add index.html css/brutalist-theme.css js/state.js js/sounds.js js/announcements.js
+git commit -m "feat(vedesh): implement command center shell, state store, procedural audio and announcements"
 git push origin main
 ```
