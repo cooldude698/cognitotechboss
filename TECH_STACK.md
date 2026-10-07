@@ -13,7 +13,7 @@
 | **Styling Paradigm** | Pure Vanilla CSS (CSS3 Custom Properties) | Maximum control, zero CSS purging/bundling issues, exact Neo-Brutalist pixel fidelity. |
 | **Audio Engine** | Procedural Web Audio API (Native `AudioContext`) | Synthesizes sounds in-browser directly. Never fails due to missing MP3 files or CDN blocks. |
 | **Graphics & Charts** | Chart.js 4.4.x (via CDN) | Lightweight, performant canvas-rendered bar and doughnut charts for live house statistics. |
-| **Typography** | Google Fonts (`Syne` / `Fraunces` + `JetBrains Mono` + `DM Sans`) | Replicates CareBridge editorial-headline & technical-mono character. |
+| **Typography** | Google Fonts (`Syne` / `Fraunces` + `JetBrains Mono` + `DM Sans`) | Editorial-headline & technical-mono character. |
 | **Iconography** | Font Awesome 6.5.x CDN | Full coverage for crowns, skulls, timers, shields, and indicators. |
 | **Hosting Platform** | Vercel / GitHub Pages | Instant production deployment from the `main` branch. |
 
@@ -41,7 +41,7 @@ Place the following CDN script tags inside `index.html`:
 
 ---
 
-## 3. CareBridge Neo-Brutalist Design Tokens (`css/brutalist-theme.css`)
+## 3. Neo-Brutalist Design Tokens (`css/brutalist-theme.css`)
 
 ```css
 :root {
@@ -126,7 +126,7 @@ Place the following CDN script tags inside `index.html`:
   box-shadow: var(--shadow-active);
 }
 
-/* CareBridge Tilted Sticky Tag */
+/* Tilted Sticky Tag */
 .sticky-tag {
   display: inline-block;
   padding: 4px 12px;

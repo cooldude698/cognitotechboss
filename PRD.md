@@ -3,14 +3,14 @@
 **Team:** Cognito (Vedesh, Aman, Prith)  
 **Target:** [tech-boss.vercel.app/round-1](https://tech-boss.vercel.app/round-1)  
 **Time Limit:** 45 Minutes  
-**Design Reference:** [CareBridge](https://carebridge-eight-kohl.vercel.app/) (Neo-Brutalist / Editorial Papercraft)
+**Design Paradigm:** Custom Neo-Brutalist / Editorial Papercraft Command Center
 
 ---
 
 ## 1. Executive Summary & Vision
 The Big Boss House is descending into chaos. Big Boss requires an unyielding, real-time command dashboard to control, monitor, nominate, reward, punish, and evict house contestants during live operations.
 
-Rather than a generic corporate dashboard or dark dashboard, this platform adopts a **high-energy Neo-Brutalist "CareBridge-style" aesthetic**: warm paper backgrounds (`#FBF9F4`), 2px bold ink borders (`#121214`), hard isometric drop shadows (`4px 4px 0px #121214`), high-contrast highlighter tags (Lime `#D4F77C`, Yellow `#FEE159`, Pink `#FF5C98`, Lavender `#EDE9FE`), retro sticky tags, and interactive drama sandbox triggers.
+Rather than a generic corporate dashboard or dark dashboard, this platform adopts a **high-energy Neo-Brutalist aesthetic**: warm paper backgrounds (`#FBF9F4`), 2px bold ink borders (`#121214`), hard isometric drop shadows (`4px 4px 0px #121214`), high-contrast highlighter tags (Lime `#D4F77C`, Yellow `#FEE159`, Pink `#FF5C98`, Lavender `#EDE9FE`), retro sticky tags, and interactive drama sandbox triggers.
 
 ---
 
@@ -39,7 +39,7 @@ Rather than a generic corporate dashboard or dark dashboard, this platform adopt
 
 ---
 
-## 4. UI/UX Specifications (CareBridge Design Language)
+## 4. UI/UX Specifications (Neo-Brutalist Design Language)
 - **Palette Tokens:**
   - Base Paper: `#FBF9F4` / `#FAF8F5`
   - Deep Ink: `#121214`

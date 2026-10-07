@@ -1,5 +1,5 @@
 /* ==========================================================================
-   CAREBRIDGE NEO-BRUTALIST DESIGN SYSTEM (1:1 PIXEL-ACCURATE THEME)
+   NEO-BRUTALIST DESIGN SYSTEM (PAPER & INK REALITY OPS THEME)
    ========================================================================== */
 
 :root {
@@ -88,7 +88,7 @@ body {
   border-radius: var(--radius-sm);
 }
 
-/* Iconic Pink Highlighter Box from CareBridge Hero */
+/* Pink Highlighter Box */
 .highlight-pink {
   background-color: var(--accent-pink);
   color: var(--ink-900);
@@ -119,8 +119,8 @@ body {
   box-shadow: var(--shadow-hover);
 }
 
-/* CareBridge Big Canvas Card */
-.carebridge-canvas-card {
+/* Big Canvas Card */
+.canvas-card {
   background: var(--bg-card);
   border: var(--border-thick);
   border-radius: var(--radius-xl);
@@ -202,7 +202,7 @@ body {
   background: var(--ink-700);
 }
 
-/* CareBridge Tilted Sticky Badges */
+/* Tilted Sticky Badges */
 .sticky-tag {
   display: inline-flex;
   align-items: center;
@@ -261,7 +261,7 @@ body {
   letter-spacing: 0.02em;
 }
 
-/* CareBridge Interactive Sandbox Layout */
+/* Interactive Sandbox Layout */
 .sandbox-hero-box {
   background: #ffffff;
   border: var(--border-thick);
@@ -347,7 +347,7 @@ body {
   line-height: 1.35;
 }
 
-/* CareBridge Fanned-Out Cards Showcase */
+/* Fanned-Out Cards Showcase */
 .fan-cards-showcase {
   position: relative;
   width: 100%;

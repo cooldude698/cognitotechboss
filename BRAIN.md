@@ -102,7 +102,7 @@ window.AppState = {
 
 ### 🅰️ Brain 1: Vedesh (Foundation, Layout Shell & Sound Engine)
 - **Files Owned:**
-  - `index.html` (Primary viewport scaffold, CareBridge 3-column layout)
+  - `index.html` (Primary viewport scaffold, responsive 3-column layout)
   - `css/brutalist-theme.css` (Design tokens, paper grids, brutalist card & button classes)
   - `js/state.js` (Initial mock data seed, mutation utilities, state event dispatcher)
   - `js/sounds.js` (Procedural Web Audio API sound generator — eliminates missing MP3 404s)
@@ -138,7 +138,7 @@ window.AppState = {
   - `js/tasks.js` (Renders task list, assign dropdown, handles "Mark Done" and reward payout)
   - `js/timer.js` (1-sec interval loop, format MM:SS, `<10s` panic mode flashing red class, alarm audio trigger)
   - `js/stats.js` (Calculates live stats: MVP, tasks done, danger count; renders Chart.js bar chart)
-  - `js/genZ.js` (CareBridge-style interactive event buttons: "Trigger Fight", "Slay Boost", "Skill Issue Penalty")
+  - `js/genZ.js` (Interactive event buttons: "Trigger Fight", "Slay Boost", "Skill Issue Penalty")
 
 ---
 

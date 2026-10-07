@@ -11,7 +11,7 @@
 **Challenge:** Build a web application that allows Big Boss to monitor and control the House in real time.
 **Time Limit:** 45 minutes
 **Platform:** [tech-boss.vercel.app/round-1](https://tech-boss.vercel.app/round-1)
-**Design System Inspiration:** [CareBridge](https://carebridge-eight-kohl.vercel.app/) (Neo-Brutalist Paper Aesthetic)
+**Design Paradigm:** Neo-Brutalist Paper & Ink Command Center Aesthetic
 **Scoring:** Each verified feature = 100 pts | Early submission bonus = up to 60 pts | More features > faster submission
 
 ---
@@ -20,10 +20,10 @@
 
 | Document | Purpose | File Link |
 |---|---|---|
-| **📄 PRD** | Complete Product Requirements, Acceptance Criteria, & 12 Deliverables | [PRD.md](file:///c:/Users/Vedesh/cognitotechboss/PRD.md) |
-| **🧠 BRAIN** | System Architecture, Reactive Event Bus, & 3-Person Team Breakdown | [BRAIN.md](file:///c:/Users/Vedesh/cognitotechboss/BRAIN.md) |
-| **🛠️ TECH STACK** | CDNs, CareBridge Neo-Brutalist CSS Tokens, Fonts, & Audio Synthesizer | [TECH_STACK.md](file:///c:/Users/Vedesh/cognitotechboss/TECH_STACK.md) |
-| **📑 SCHEMA** | Data Contracts, JSON Schemas, Entity Types, & Action Payloads | [SCHEMA.md](file:///c:/Users/Vedesh/cognitotechboss/SCHEMA.md) |
+| **📄 PRD** | Complete Product Requirements, Acceptance Criteria, & 12 Deliverables | [PRD.md](PRD.md) |
+| **🧠 BRAIN** | System Architecture, Reactive Event Bus, & 3-Person Team Breakdown | [BRAIN.md](BRAIN.md) |
+| **🛠️ TECH STACK** | CDNs, Neo-Brutalist CSS Tokens, Fonts, & Audio Synthesizer | [TECH_STACK.md](TECH_STACK.md) |
+| **📑 SCHEMA** | Data Contracts, JSON Schemas, Entity Types, & Action Payloads | [SCHEMA.md](SCHEMA.md) |
 
 ---
 
