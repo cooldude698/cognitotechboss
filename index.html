@@ -31,6 +31,9 @@
   <!-- Matrix Code Rain Canvas -->
   <canvas id="matrix-canvas"></canvas>
 
+  <!-- Floating Toast Notification Stack -->
+  <div id="toast-container" class="toast-stack-container" aria-live="polite"></div>
+
   <!-- 1. Top High-Priority Broadcast Ticker -->
   <header class="top-broadcast-bar">
     <div class="broadcast-badge">
@@ -88,6 +91,69 @@
 
       <!-- Right Action Pill Buttons -->
       <div class="header-actions">
+        <!-- Live Event Notifications Bell & Dropdown Tray -->
+        <div style="position: relative;">
+          <button class="btn-brutalist btn-mini" id="notification-bell-btn" title="Live Event Notifications" onclick="window.toggleNotificationsTray()" style="display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; font-size: 0.75rem;">
+            <i class="fa-solid fa-bell"></i>
+            <span id="notification-unread-count" class="pill-badge" style="background: var(--accent-pink); color: #fff; font-weight: 900; font-size: 0.65rem; padding: 1px 6px; border: 1.5px solid var(--ink-900); display: none;">0</span>
+          </button>
+
+          <!-- Dropdown Tray -->
+          <div id="notifications-dropdown" class="notifications-dropdown-menu">
+            <div style="padding: 0.85rem 1rem; border-bottom: 2px solid var(--ink-900); background: #ffffff; display: flex; align-items: center; justify-content: space-between;">
+              <div style="display: flex; align-items: center; gap: 0.4rem;">
+                <span style="font-family: var(--font-serif); font-size: 0.95rem; font-weight: 900;">
+                  <i class="fa-solid fa-bell"></i> Event Notifications
+                </span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 0.35rem;">
+                <button class="btn-brutalist btn-mini" title="Fire Test Event Notification" onclick="window.testNotification()" style="font-size: 0.62rem; padding: 2px 6px; background: var(--accent-yellow);">
+                  ⚡ Test
+                </button>
+                <button class="btn-brutalist btn-mini btn-danger" onclick="window.toggleNotificationsTray(false)" style="padding: 2px 6px;">
+                  ✕
+                </button>
+              </div>
+            </div>
+
+            <!-- Action Controls Bar -->
+            <div style="padding: 0.4rem 0.85rem; background: var(--bg-paper-alt); border-bottom: 2px solid var(--ink-900); display: flex; align-items: center; justify-content: space-between; font-family: var(--font-mono); font-size: 0.65rem;">
+              <div style="display: flex; gap: 0.5rem;">
+                <button onclick="window.markAllNotificationsRead()" style="background: none; border: none; font-weight: 800; cursor: pointer; color: var(--ink-700); text-decoration: underline;">
+                  Mark all read
+                </button>
+                <span>•</span>
+                <button onclick="window.clearAllNotifications()" style="background: none; border: none; font-weight: 800; cursor: pointer; color: #DC2626; text-decoration: underline;">
+                  Clear all
+                </button>
+              </div>
+              <button onclick="window.requestPushNotifications()" style="background: #ffffff; border: 1px solid var(--ink-900); border-radius: 4px; padding: 1px 5px; font-weight: 800; cursor: pointer;">
+                <i class="fa-solid fa-desktop"></i> Desktop Push
+              </button>
+            </div>
+
+            <!-- Category Filter Pills -->
+            <div style="display: flex; gap: 0.35rem; padding: 0.5rem 0.85rem; border-bottom: 1px solid var(--ink-300); background: #ffffff; overflow-x: auto;">
+              <button class="btn-brutalist btn-mini notif-filter-btn active" data-notif-filter="all" onclick="window.filterNotifications('all')" style="font-size: 0.65rem; padding: 2px 8px; background: var(--accent-yellow); box-shadow: 2px 2px 0px var(--ink-900);">
+                All
+              </button>
+              <button class="btn-brutalist btn-mini notif-filter-btn" data-notif-filter="urgent" onclick="window.filterNotifications('urgent')" style="font-size: 0.65rem; padding: 2px 8px;">
+                🚨 Urgent
+              </button>
+              <button class="btn-brutalist btn-mini notif-filter-btn" data-notif-filter="decree" onclick="window.filterNotifications('decree')" style="font-size: 0.65rem; padding: 2px 8px;">
+                📢 Decrees
+              </button>
+              <button class="btn-brutalist btn-mini notif-filter-btn" data-notif-filter="task" onclick="window.filterNotifications('task')" style="font-size: 0.65rem; padding: 2px 8px;">
+                🎯 Tasks
+              </button>
+            </div>
+
+            <!-- Scrollable Notifications List -->
+            <div id="notifications-dropdown-list" style="max-height: 320px; overflow-y: auto;">
+            </div>
+          </div>
+        </div>
+
         <span class="pill-badge" id="current-role-badge" style="background: var(--accent-yellow); font-weight: 900; font-size: 0.7rem; border: 2px solid var(--ink-900); padding: 4px 10px;">
           👑 BIG BOSS
         </span>
@@ -309,6 +375,17 @@
             </div>
             <div class="sandbox-event-btn-sub">
               Deducts 50 pts from lowest scorer. Drops house morale and plays Vine Boom.
+            </div>
+          </div>
+
+          <!-- Button 4: Event Notification Test -->
+          <div class="sandbox-event-btn" style="background: #FAF5FF; border-color: #7C3AED;" onclick="window.testNotification();">
+            <div class="sandbox-event-btn-header" style="color: #7C3AED;">
+              <span>🔔 DISPATCH TEST EVENT NOTIFICATION</span>
+              <span class="pill-badge" style="background: #7C3AED; color: #fff; border: none;">LIVE TOAST</span>
+            </div>
+            <div class="sandbox-event-btn-sub">
+              Spawns random high-priority house event toast, sounds audio chime, and updates notification tray.
             </div>
           </div>
 
@@ -894,6 +971,7 @@
   <script src="js/genZ.js"></script>
   <script src="js/activityLog.js"></script>
   <script src="js/rbac.js"></script>
+  <script src="js/notifications.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

@@ -314,9 +314,45 @@
           permissions: ['vote']
         }
       },
+      notifications: [
+        {
+          id: 'notif_init_1',
+          title: '🚨 DANGER ZONE ALERT',
+          message: 'Elena and Rohan have been nominated for eviction! Vote to save.',
+          type: 'danger',
+          icon: 'fa-triangle-exclamation',
+          viewTarget: 'view-danger-zone',
+          read: false,
+          timestamp: Date.now() - 120000,
+          time: '2m ago'
+        },
+        {
+          id: 'notif_init_2',
+          title: '👑 CAPTAINCY CORONATION',
+          message: 'Marcus is officially crowned House Captain. Immunity shield active!',
+          type: 'decree',
+          icon: 'fa-crown',
+          viewTarget: 'view-contestants',
+          read: false,
+          timestamp: Date.now() - 360000,
+          time: '6m ago'
+        },
+        {
+          id: 'notif_init_3',
+          title: '🎯 TASK BOUNTY UNLOCKED',
+          message: 'Code Refactoring task completed! +100 House Points awarded.',
+          type: 'task',
+          icon: 'fa-trophy',
+          viewTarget: 'view-tasks',
+          read: true,
+          timestamp: Date.now() - 900000,
+          time: '15m ago'
+        }
+      ],
       settings: {
         soundMuted: false,
-        darkMode: false
+        darkMode: false,
+        pushNotificationsEnabled: false
       }
     };
   }
@@ -325,7 +361,11 @@
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
-        return JSON.parse(stored);
+        const parsed = JSON.parse(stored);
+        if (!parsed.notifications || !Array.isArray(parsed.notifications)) {
+          parsed.notifications = getFreshDemoState().notifications;
+        }
+        return parsed;
       }
     } catch (e) {
       console.warn('Failed reading from localStorage:', e);
