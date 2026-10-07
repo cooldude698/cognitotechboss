@@ -358,14 +358,59 @@
 
       osc.start(now);
       osc.stop(now + 0.35);
+    },
+
+    // Real Meme Audio Path Map
+    REAL_MEME_AUDIO: {
+      'vineboom': 'sounds/vine-boom.mp3',
+      'gavel': 'sounds/vine-boom.mp3',
+      'bruh': 'sounds/bruh.mp3',
+      'metalpipe': 'sounds/metal-pipe.mp3',
+      'pipe': 'sounds/metal-pipe.mp3',
+      'airhorn': 'sounds/airhorn.mp3',
+      'emotional_damage': 'sounds/emotional-damage.mp3',
+      'damage': 'sounds/emotional-damage.mp3',
+      'sigma': 'sounds/what-the-sigma.mp3',
+      'what_the_sigma': 'sounds/what-the-sigma.mp3',
+      'womp': 'sounds/womp-womp.mp3',
+      'sadtrombone': 'sounds/womp-womp.mp3',
+      'cook': 'sounds/let-him-cook.mp3',
+      'let_him_cook': 'sounds/let-him-cook.mp3',
+      'sus': 'sounds/emergency-meeting.mp3',
+      'emergency': 'sounds/emergency-meeting.mp3',
+      'skibidi': 'sounds/skibidi.mp3'
+    },
+
+    playRealAudio: function (key) {
+      if (isMuted) return false;
+      const file = this.REAL_MEME_AUDIO[key];
+      if (file) {
+        try {
+          const audio = new Audio(file);
+          audio.volume = 1.0;
+          audio.play().catch(err => {
+            console.warn('Direct MP3 playback warning, using synth fallback:', err);
+          });
+          return true;
+        } catch (e) {
+          return false;
+        }
+      }
+      return false;
     }
   };
 
   /**
-   * Global Universal SFX Helper
-   * @param {string} type 'beep' | 'airhorn' | 'vineboom' | 'alarm' | 'snap' | 'bruh' | 'sus' | 'sheesh'
+   * Global Universal SFX Helper - Plays Real Meme Sound First, falls back to Procedural Synth
+   * @param {string} type 'vineboom' | 'bruh' | 'metalpipe' | 'airhorn' | 'sigma' | 'womp' | 'cook' | 'sus' | 'skibidi' | 'emotional_damage' | 'beep' | 'alarm'
    */
   window.playSfx = function (type) {
+    // 1. Try playing real high-quality authentic meme MP3 first
+    if (window.SoundEngine.playRealAudio(type)) {
+      return;
+    }
+
+    // 2. Procedural Web Audio Synthesis Fallback
     switch (type) {
       case 'beep':
         window.SoundEngine.playBeep();

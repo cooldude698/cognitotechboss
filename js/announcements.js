@@ -46,89 +46,89 @@
   };
 
   const MEME_SLOGANS = {
+    sigma: {
+      label: "🗿 WHAT THE SIGMA",
+      speech: "Erm, what the sigma?!",
+      sfx: "sigma",
+      emoji: "🗿",
+      subtext: "MEWING STREAK: ACTIVE • CHAD MODE"
+    },
+    damage: {
+      label: "💔 EMOTIONAL DAMAGE",
+      speech: "EMOTIONAL DAMAGE!",
+      sfx: "damage",
+      emoji: "💔",
+      subtext: "CRITICAL HIT • 9999 DAMAGE"
+    },
+    cook: {
+      label: "🍳 LET HIM COOK",
+      speech: "Wait hold on... let him cook now!",
+      sfx: "cook",
+      emoji: "🍳",
+      subtext: "HE IS IN THE KITCHEN • CHEF MODE"
+    },
     skibidi: {
-      label: "🚽 SKIBIDI TOILET RIZZ",
-      speech: "Skibidi dop dop dop yes yes! Level 10 Gyatt detected in Ohio!",
+      label: "🚽 SKIBIDI TOILET",
+      speech: "Skibidi dop dop dop yes yes!",
       sfx: "skibidi",
       emoji: "🚽",
       subtext: "OHIO RIZZ LEVEL: 9999 • NO CAP"
     },
-    fanum: {
-      label: "🍟 FANUM TAX YOINK",
-      speech: "YOINK! Fanum tax collected on your rations! Hand over the pizza bro!",
-      sfx: "cointax",
-      emoji: "🍟",
-      subtext: "COMMISSARY SNACKS CONFISCATED"
-    },
-    sigma: {
-      label: "🗿 WHAT THE SIGMA",
-      speech: "What the sigma?! Bro is literally mewing while committing syntax errors to main!",
-      sfx: "vineboom",
-      emoji: "🗿",
-      subtext: "MEWING STREAK: ACTIVE • CHAD MODE"
-    },
     l_ratio: {
-      label: "💀 L + RATIO + SKILL ISSUE",
-      speech: "L plus ratio plus caught in 4K plus massive skill issue plus touch grass plus you fell off!",
+      label: "💀 METAL PIPE CLANG",
+      speech: "CLANG! Massive skill issue detected!",
       sfx: "metalpipe",
       emoji: "💀",
       subtext: "BRO GOT CAUGHT IN 4K • RATIO'D"
     },
+    vineboom: {
+      label: "💥 VINE BOOM",
+      speech: "BOOM! Sub-bass shockwave!",
+      sfx: "vineboom",
+      emoji: "💥",
+      subtext: "55Hz BASS BLAST • SHOCKWAVE"
+    },
+    bruh: {
+      label: "🗿 BRUH MOMENT",
+      speech: "Bruh...",
+      sfx: "bruh",
+      emoji: "🗿",
+      subtext: "CERTIFIED BRUH MOMENT"
+    },
+    aura_minus: {
+      label: "📉 WOMP WOMP WOMP",
+      speech: "Womp womp womp womp! Minus 50,000 aura!",
+      sfx: "womp",
+      emoji: "📉",
+      subtext: "AURA BANKRUPTCY • WOMP WOMP"
+    },
     aura_plus: {
-      label: "⚡ +100K AURA BOOST",
-      speech: "SHEESH! Plus 100,000 aura points! Unspoken rizz achieved! Bro is him!",
+      label: "⚡ +100K MLG AIRHORN",
+      speech: "SHEESH! Plus 100,000 aura points! Bro is him!",
       sfx: "airhorn",
       emoji: "⚡",
       subtext: "MAXIMUM AURA UNLOCKED • BRO IS HIM"
     },
-    aura_minus: {
-      label: "📉 -50K NEGATIVE AURA",
-      speech: "WOMP WOMP! Minus 50,000 aura points! Bro thought he was the main character!",
-      sfx: "sadtrombone",
-      emoji: "📉",
-      subtext: "AURA BANKRUPTCY • WOMP WOMP"
-    },
-    cook: {
-      label: "🍳 LET HIM COOK",
-      speech: "Wait hold on chat... let him cook! Wait bro is burning down the entire kitchen!",
-      sfx: "sheesh",
-      emoji: "🍳",
-      subtext: "HE IS IN THE KITCHEN • CHEF MODE"
-    },
-    chat: {
-      label: "🚨 CHAT IS THIS REAL",
-      speech: "Chat is this real or am I hallucinating in Ohio right now?!",
-      sfx: "alarm",
-      emoji: "🚨",
-      subtext: "LIVE STREAM CHAT MELTDOWN"
-    },
-    cap: {
-      label: "🧢 MASSIVE CAP DETECTED",
-      speech: "CAP! Absolute colossal cap! Bro is capping harder than a graduation ceremony!",
-      sfx: "bruh",
-      emoji: "🧢",
-      subtext: "LIE DETECTOR TEST FAILED: 100% CAP"
-    },
-    slay: {
-      label: "💅 PERIODT SLAY BADDIE",
-      speech: "Periodt! No cap on god, ate and left zero crumbs bestie! Pure baddie energy! Slay!",
-      sfx: "airhorn",
-      emoji: "💅",
-      subtext: "ATE AND LEFT ZERO CRUMBS"
-    },
     sus: {
-      label: "🛸 SUSSY BAKA MEETING",
-      speech: "EMERGENCY MEETING! Sussy baka vented in the coding den! Vote him out right now!",
+      label: "🛸 EMERGENCY MEETING",
+      speech: "EMERGENCY MEETING! Sussy baka detected!",
       sfx: "sus",
       emoji: "🛸",
       subtext: "WHO VENTED IN SECTOR BETA?!"
     },
-    npc: {
-      label: "🍦 TIKTOK NPC GANG GANG",
-      speech: "Ice cream so good! Gang gang yes yes! Thank you for the roses! Pop pop pop!",
-      sfx: "beep",
-      emoji: "🍦",
-      subtext: "THANK YOU FOR THE GALAXY 🌹"
+    fanum: {
+      label: "🍟 FANUM TAX YOINK",
+      speech: "YOINK! Fanum tax collected on rations!",
+      sfx: "bruh",
+      emoji: "🍟",
+      subtext: "COMMISSARY SNACKS CONFISCATED"
+    },
+    chat: {
+      label: "🚨 CHAT IS THIS REAL",
+      speech: "Chat is this real or am I hallucinating?!",
+      sfx: "sus",
+      emoji: "🚨",
+      subtext: "LIVE STREAM CHAT MELTDOWN"
     }
   };
 
@@ -245,13 +245,13 @@
   };
 
   /**
-   * Plays Instant Gen-Z Meme Slogan from Soundboard
+   * Plays Instant Authentic Gen-Z Meme Audio Clip from Soundboard
    */
   window.triggerMemeSlogan = function (key) {
     const item = MEME_SLOGANS[key];
     if (!item) return;
 
-    // 1. Play procedural meme SFX
+    // 1. Play ACTUAL REAL AUTHENTIC MEME AUDIO FILE!
     if (window.playSfx) window.playSfx(item.sfx);
 
     // 2. Trigger screen shake
@@ -263,18 +263,7 @@
     // 4. Show Giant Brutalist Meme Overlay
     window.showGiantMemeOverlay(item.label, item.subtext, item.emoji);
 
-    // 5. Speak meme decree with crazy inflection
-    if (window.speechSynthesis && (!window.AppState || !window.AppState.settings.soundMuted)) {
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(item.speech);
-      const config = VOICE_CONFIGS[activeVoiceMode] || VOICE_CONFIGS.sigma;
-      utterance.pitch = config.pitch;
-      utterance.rate = config.rate;
-      utterance.volume = 1.0;
-      window.speechSynthesis.speak(utterance);
-    }
-
-    // 6. Update banner & ticker
+    // 5. Update banner & ticker
     const banner = document.getElementById('announcement-banner');
     if (banner) {
       const msgEl = banner.querySelector('.announcement-msg-text') || banner;
@@ -286,7 +275,7 @@
       ticker.textContent = `🚨 MEME ALERT: ${item.label} — "${item.speech.toUpperCase()}" • NO CAP •`;
     }
 
-    if (window.triggerConfetti && (key === 'aura_plus' || key === 'cook' || key === 'slay')) {
+    if (window.triggerConfetti && (key === 'aura_plus' || key === 'cook' || key === 'damage')) {
       window.triggerConfetti();
     }
   };
