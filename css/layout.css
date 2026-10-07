@@ -1,0 +1,414 @@
+/* ==========================================================================
+   COMMAND CENTER HUD LAYOUT (3-COLUMN DESKTOP + RESPONSIVE)
+   ========================================================================== */
+
+/* Top Broadcast Marquee Bar */
+.top-broadcast-bar {
+  background: var(--ink-900);
+  color: var(--accent-yellow);
+  border-bottom: var(--border-heavy);
+  padding: 0.5rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.broadcast-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 900;
+  background: var(--accent-pink);
+  color: #fff;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid #fff;
+  white-space: nowrap;
+}
+
+.broadcast-ticker-wrap {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  height: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.broadcast-ticker {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-lime);
+  white-space: nowrap;
+  animation: ticker-slide 25s linear infinite;
+  display: inline-block;
+}
+
+.broadcast-ticker:hover {
+  animation-play-state: paused;
+}
+
+@keyframes ticker-slide {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.system-status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-300);
+}
+
+.rec-pulse-dot {
+  width: 10px;
+  height: 10px;
+  background-color: var(--accent-danger-ink);
+  border-radius: 50%;
+  display: inline-block;
+  animation: rec-blink 1.2s infinite;
+}
+
+@keyframes rec-blink {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(0.85); }
+}
+
+/* Master Header Nav */
+.main-header {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 1.25rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.brand-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.brand-logo-eye {
+  width: 44px;
+  height: 44px;
+  background: var(--accent-yellow);
+  border: var(--border-heavy);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  transform: rotate(-3deg);
+  transition: transform 0.2s ease;
+}
+
+.brand-logo-eye:hover {
+  transform: rotate(6deg) scale(1.05);
+}
+
+.brand-text h1 {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: var(--ink-900);
+  line-height: 1.1;
+}
+
+.brand-text span {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-500);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* 3-Column Command Grid Container */
+.command-center-container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 2rem 3rem;
+  display: grid;
+  grid-template-columns: 280px minmax(500px, 1fr) 360px;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* Column 1: Left Navigation & Drama Controller */
+.hud-col-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  position: sticky;
+  top: 60px;
+}
+
+/* Nav Menu Tabs */
+.nav-tab-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.nav-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border: var(--border-thick);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ink-900);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.15s ease;
+  text-align: left;
+}
+
+.nav-tab-btn i {
+  font-size: 1rem;
+  width: 20px;
+  text-align: center;
+}
+
+.nav-tab-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: var(--shadow-md);
+  background: var(--bg-paper-alt);
+}
+
+.nav-tab-btn.active {
+  background: var(--accent-lime);
+  box-shadow: var(--shadow-md);
+  transform: translate(-2px, -2px);
+}
+
+/* Drama Meter Box */
+.drama-meter-card {
+  background: var(--bg-card);
+  border: var(--border-thick);
+  border-radius: var(--radius-lg);
+  padding: 1.2rem;
+  box-shadow: var(--shadow-md);
+}
+
+.drama-meter-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.drama-meter-bar-outer {
+  width: 100%;
+  height: 16px;
+  background: var(--ink-100);
+  border: var(--border-thick);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+.drama-meter-fill {
+  height: 100%;
+  width: 65%;
+  background: linear-gradient(90deg, var(--accent-lime), var(--accent-yellow), var(--accent-pink));
+  border-radius: var(--radius-pill);
+  transition: width 0.4s ease-in-out;
+}
+
+/* Column 2: Center Main Viewport */
+.hud-col-center {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-height: 800px;
+}
+
+.view-section {
+  display: none;
+  animation: fadeIn 0.25s ease-in-out forwards;
+}
+
+.view-section.active {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Column 3: Right Sidebar (Leaderboard + Timer HUD + Logs) */
+.hud-col-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  position: sticky;
+  top: 60px;
+}
+
+/* CCTV 4-Channel Surveillance Grid */
+.cctv-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.cctv-channel {
+  background: #000;
+  border: var(--border-heavy);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  height: 220px;
+  position: relative;
+  overflow: hidden;
+  color: #00ff66;
+  font-family: var(--font-mono);
+}
+
+.cctv-scanlines {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.4) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.04),
+    rgba(0, 255, 0, 0.02),
+    rgba(0, 0, 255, 0.04)
+  );
+  background-size: 100% 4px, 6px 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.cctv-feed-overlay {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  z-index: 15;
+}
+
+.cctv-feed-cam-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+.cctv-camera-screen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #090c0f;
+  background-image: 
+    radial-gradient(#142217 15%, transparent 16%),
+    radial-gradient(#142217 15%, transparent 16%);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+  color: #33cc66;
+}
+
+/* Evicted Hall of Shame Drawer */
+.hall-of-shame-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.evicted-card {
+  background: #fdf2f2;
+  border: var(--border-thick);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  filter: grayscale(80%);
+  position: relative;
+  overflow: hidden;
+}
+
+.evicted-card::after {
+  content: 'EVICTED';
+  position: absolute;
+  top: 15px;
+  right: -25px;
+  background: var(--accent-danger-ink);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 900;
+  padding: 2px 30px;
+  transform: rotate(45deg);
+  letter-spacing: 0.1em;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1200px) {
+  .command-center-container {
+    grid-template-columns: 240px 1fr;
+  }
+  .hud-col-right {
+    grid-column: 1 / -1;
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .command-center-container {
+    grid-template-columns: 1fr;
+    padding: 0 1rem 2rem;
+  }
+  .hud-col-left {
+    position: static;
+  }
+  .cctv-grid {
+    grid-template-columns: 1fr;
+  }
+  .main-header {
+    padding: 1rem;
+  }
+}

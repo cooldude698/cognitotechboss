@@ -1,0 +1,218 @@
+/* ==========================================================================
+   CAREBRIDGE NEO-BRUTALIST DESIGN SYSTEM TOKENS & UTILITIES
+   ========================================================================== */
+
+:root {
+  /* Paper & Ink Foundations */
+  --bg-paper: #FBF9F4;
+  --bg-paper-alt: #FAF8F5;
+  --bg-card: #FFFFFF;
+  --ink-900: #121214;
+  --ink-800: #1c1c20;
+  --ink-700: #2d2d32;
+  --ink-500: #5b5b63;
+  --ink-300: #a1a1aa;
+  --ink-100: #f4f4f5;
+
+  /* Highlighter Accent Palettes */
+  --accent-lime: #D4F77C;
+  --accent-lime-hover: #c4ee5e;
+  --accent-yellow: #FEE159;
+  --accent-yellow-hover: #fedb38;
+  --accent-pink: #FF5C98;
+  --accent-lavender: #EDE9FE;
+  --accent-danger: #FEE2E2;
+  --accent-danger-ink: #DC2626;
+  --accent-cyan: #A5F3FC;
+
+  /* Brutalist Geometric Shadow & Border Tokens */
+  --border-thick: 2px solid var(--ink-900);
+  --border-heavy: 3px solid var(--ink-900);
+  --border-subtle: 1px solid var(--ink-900);
+  
+  --shadow-sm: 2px 2px 0px var(--ink-900);
+  --shadow-md: 4px 4px 0px var(--ink-900);
+  --shadow-lg: 6px 6px 0px var(--ink-900);
+  --shadow-hover: 5px 5px 0px var(--ink-900);
+  --shadow-active: 1px 1px 0px var(--ink-900);
+
+  /* Radius Tokens */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-pill: 9999px;
+
+  /* Typography Stacks */
+  --font-serif: 'Syne', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: 'DM Sans', -apple-system, sans-serif;
+}
+
+/* Base Resets */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-paper);
+  background-image: radial-gradient(var(--ink-300) 1px, transparent 0);
+  background-size: 24px 24px;
+  color: var(--ink-900);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-paper-alt);
+  border-left: var(--border-thick);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--ink-900);
+  border-radius: var(--radius-sm);
+}
+
+/* Brutalist Reusable Components */
+.brutalist-card {
+  background: var(--bg-card);
+  border: var(--border-thick);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 1.25rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  position: relative;
+}
+
+.brutalist-card:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Brutalist Button Styles */
+.btn-brutalist {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.6rem 1.2rem;
+  border: var(--border-thick);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-sm);
+  background: var(--bg-card);
+  color: var(--ink-900);
+  cursor: pointer;
+  text-decoration: none;
+  user-select: none;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.1s ease;
+}
+
+.btn-brutalist:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: var(--shadow-hover);
+  background: var(--bg-paper-alt);
+}
+
+.btn-brutalist:active {
+  transform: translate(2px, 2px);
+  box-shadow: var(--shadow-active);
+}
+
+.btn-lime {
+  background: var(--accent-lime);
+}
+.btn-lime:hover {
+  background: var(--accent-lime-hover);
+}
+
+.btn-yellow {
+  background: var(--accent-yellow);
+}
+.btn-yellow:hover {
+  background: var(--accent-yellow-hover);
+}
+
+.btn-pink {
+  background: var(--accent-pink);
+  color: #fff;
+}
+.btn-pink:hover {
+  background: #f43f7f;
+}
+
+.btn-danger {
+  background: var(--accent-danger);
+  color: var(--accent-danger-ink);
+}
+.btn-danger:hover {
+  background: #fca5a5;
+}
+
+/* CareBridge Tilted Sticky Badges */
+.sticky-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.85rem;
+  border: var(--border-thick);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: var(--shadow-sm);
+  background: #fff;
+}
+
+.sticky-tag.rotate-left {
+  transform: rotate(-2deg);
+}
+.sticky-tag.rotate-right {
+  transform: rotate(2deg);
+}
+.sticky-tag.lime {
+  background: var(--accent-lime);
+}
+.sticky-tag.yellow {
+  background: var(--accent-yellow);
+}
+.sticky-tag.pink {
+  background: var(--accent-pink);
+  color: #fff;
+}
+.sticky-tag.lavender {
+  background: var(--accent-lavender);
+}
+.sticky-tag.danger {
+  background: var(--accent-danger);
+  color: var(--accent-danger-ink);
+}
+
+/* Pill Badges */
+.pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-pill);
+  border: var(--border-subtle);
+  background: #fff;
+}
