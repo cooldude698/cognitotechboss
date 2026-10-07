@@ -87,45 +87,49 @@
   <!-- =========================================================================
        3. ICONIC CAREBRIDGE HERO SECTION WITH PINK HIGHLIGHTER & FANNED CARDS
        ========================================================================= -->
-  <section style="max-width: 1280px; margin: 0 auto; padding: 3.5rem 1.5rem 2.5rem; text-align: center; position: relative;">
+  <section style="max-width: 1240px; margin: 0 auto; padding: 4rem 1.5rem 2.5rem; text-align: center; position: relative;">
     
     <!-- Top Capsule Pill -->
-    <div style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.45rem 1.1rem; border-radius: 9999px; border: 2px solid var(--ink-900); background: #ffffff; box-shadow: 2px 2px 0px var(--ink-900); margin-bottom: 1.5rem;">
+    <div style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.45rem 1.15rem; border-radius: 9999px; border: 2px solid var(--ink-900); background: #ffffff; box-shadow: 2px 2px 0px var(--ink-900); margin-bottom: 1.75rem;">
       <i class="fa-solid fa-gear" style="font-size: 0.85rem;"></i>
       <span style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em;">
         Continuous Explainable Reality Command Loop
       </span>
     </div>
 
-    <!-- Main Headline with Iconic CareBridge Pink Highlighter Box -->
-    <h1 style="font-family: var(--font-serif); font-size: clamp(2.5rem, 5.5vw, 4.2rem); font-weight: 900; line-height: 1.08; letter-spacing: -0.04em; max-width: 950px; margin: 0 auto 1.25rem;">
-      Give the Tech House a glow up. Meet your new <span class="highlight-pink">clinical copilot.</span>
+    <!-- Main Headline with Clean Line-Height & Pink Highlighter Box -->
+    <h1 style="font-family: var(--font-serif); font-size: clamp(2.2rem, 4.8vw, 3.8rem); font-weight: 900; line-height: 1.24; letter-spacing: -0.035em; max-width: 900px; margin: 0 auto 1.5rem;">
+      Give the Tech House a glow up. Meet your new <span class="highlight-pink">command copilot.</span>
     </h1>
 
-    <p style="font-family: var(--font-sans); font-size: 1.1rem; color: var(--ink-700); max-width: 680px; margin: 0 auto 2rem; line-height: 1.55;">
+    <p style="font-family: var(--font-sans); font-size: 1.15rem; color: var(--ink-700); max-width: 680px; margin: 0 auto 2.25rem; line-height: 1.6;">
       Capture, triage, and elevate house drama across contestants, bounties, and nominations in real time.
     </p>
 
     <!-- CTAs -->
-    <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem;">
-      <a href="#control-deck" class="btn-brutalist btn-lime" style="padding: 0.8rem 1.8rem; font-size: 0.85rem;">
+    <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 3.5rem;">
+      <a href="#control-deck" class="btn-brutalist btn-lime" style="padding: 0.85rem 1.9rem; font-size: 0.85rem;">
         <i class="fa-solid fa-shield-halved"></i> EXPLORE HOUSE COCKPIT
       </a>
-      <button class="btn-brutalist" style="background: #ffffff; padding: 0.8rem 1.8rem; font-size: 0.85rem;" onclick="document.getElementById('decree-input').focus();">
+      <button class="btn-brutalist" style="background: #ffffff; padding: 0.85rem 1.9rem; font-size: 0.85rem;" onclick="document.getElementById('decree-input').focus();">
         <i class="fa-solid fa-microphone" style="color: var(--accent-pink);"></i> Try Voice Decree (Hindi/English)
       </button>
     </div>
 
-    <!-- Tilted Sticky Notes Around Hero -->
-    <div style="position: absolute; top: 18%; left: 3%; z-index: 20;" class="sticky-tag rotate-left yellow">
-      <span>📌 "Help me evict the lowest scorer"</span>
-    </div>
-    <div style="position: absolute; top: 22%; right: 4%; z-index: 20;" class="sticky-tag rotate-right pink">
-      <span>⚡ "Help me analyze Elena's drama spike"</span>
-    </div>
+    <!-- Fanned Out Cards Showcase Container with Positioned Sticky Tags -->
+    <div style="position: relative; width: 100%; max-width: 1140px; margin: 0 auto; padding-top: 1rem; padding-bottom: 2rem;">
+      
+      <!-- Top-Left Sticky Tag (Floats above first card, zero text overlap) -->
+      <div style="position: absolute; top: -12px; left: 4%; z-index: 45;" class="sticky-tag rotate-left yellow">
+        <span>📌 "Help me evict the lowest scorer"</span>
+      </div>
 
-    <!-- Fanned Out Cards Showcase (from CareBridge Screenshot 1) -->
-    <div class="fan-cards-showcase">
+      <!-- Bottom-Right Sticky Tag (Floats below last card) -->
+      <div style="position: absolute; bottom: 8px; right: 4%; z-index: 45;" class="sticky-tag rotate-right pink">
+        <span>⚡ "Help me analyze Elena's drama spike"</span>
+      </div>
+
+      <div class="fan-cards-showcase">
       <!-- Card 1: Vedesh -->
       <div class="fan-card" style="transform: rotate(-8deg) translateY(12px); z-index: 10;">
         <div style="height: 130px; border-radius: var(--radius-md); background: rgba(254, 225, 89, 0.25); border: 2px solid var(--ink-900); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0.75rem; margin-bottom: 0.75rem;">
@@ -211,6 +215,7 @@
         </div>
       </div>
     </div>
+  </div>
 
     <!-- Bottom Tilted Sticky Tag -->
     <div style="margin-top: 2rem;">

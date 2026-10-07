@@ -92,14 +92,15 @@ body {
 .highlight-pink {
   background-color: var(--accent-pink);
   color: var(--ink-900);
-  padding: 0.08em 0.35em;
-  border-radius: 12px;
+  padding: 0.05em 0.35em;
+  border-radius: 14px;
   display: inline-block;
   border: 2px solid var(--ink-900);
   box-shadow: 3px 3px 0px var(--ink-900);
   transform: rotate(-1.5deg);
   position: relative;
-  line-height: 1.1;
+  line-height: 1.15;
+  white-space: nowrap;
 }
 
 /* Brutalist Reusable Components */
