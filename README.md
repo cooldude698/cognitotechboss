@@ -134,6 +134,8 @@ cognitotechboss/
     ├── leaderboard.js          # Dynamic live leaderboard sorting & rank badges
     ├── tasks.js                # Task CRUD, assignment dropdown, mark done & bounty payouts
     ├── stats.js                # Live house metrics & Chart.js points bar chart
+    ├── genZ.js                 # Interactive triage sandbox & live drama simulator
+    ├── activityLog.js          # Real-time activity log & audit stream, filtering, search & JSON export
     └── app.js                  # Master app initializer, tab navigation, global listeners
 ```
 

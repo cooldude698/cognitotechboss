@@ -204,9 +204,94 @@
         }
       ],
       activityLog: [
-        { id: 'act_1', text: '👑 Vedesh appointed House Captain', time: '5m ago' },
-        { id: 'act_2', text: '⚠️ Elena & Sarah transferred to Danger Zone', time: '3m ago' },
-        { id: 'act_3', text: '⚡ Priya completed Morning Drill (+50 pts)', time: '1m ago' }
+        {
+          id: 'act_init_1',
+          category: 'captain',
+          type: 'captain',
+          text: '👑 Vedesh appointed House Captain (Team Alpha)',
+          contestantName: 'Vedesh',
+          team: 'Alpha',
+          delta: 0,
+          timestamp: Date.now() - 300000,
+          time: '5m ago'
+        },
+        {
+          id: 'act_init_2',
+          category: 'danger',
+          type: 'danger',
+          text: '⚠️ Elena & Sarah nominated to Danger Zone',
+          contestantName: 'Elena',
+          team: 'Alpha',
+          delta: 0,
+          timestamp: Date.now() - 180000,
+          time: '3m ago'
+        },
+        {
+          id: 'act_init_3',
+          category: 'task',
+          type: 'task',
+          text: '✅ Priya completed Morning Algorithm Drill (+50 pts)',
+          contestantName: 'Priya',
+          team: 'Beta',
+          delta: 50,
+          timestamp: Date.now() - 90000,
+          time: '1m ago'
+        },
+        {
+          id: 'act_init_4',
+          category: 'decree',
+          type: 'decree',
+          text: '📢 Big Boss Decree: "Luxury room raid starts NOW, no cap!"',
+          contestantName: '',
+          team: '',
+          delta: 0,
+          timestamp: Date.now() - 60000,
+          time: '1m ago'
+        },
+        {
+          id: 'act_init_5',
+          category: 'drama',
+          type: 'drama',
+          text: '🥊 House Dispute: Marcus vs Priya over ration distribution (-20 pts)',
+          contestantName: 'Marcus',
+          team: 'Beta',
+          delta: -20,
+          timestamp: Date.now() - 45000,
+          time: '45s ago'
+        },
+        {
+          id: 'act_init_6',
+          category: 'captain',
+          type: 'shield',
+          text: '🛡️ Rohan activated Immunity Shield',
+          contestantName: 'Rohan',
+          team: 'Omega',
+          delta: 0,
+          timestamp: Date.now() - 30000,
+          time: '30s ago'
+        },
+        {
+          id: 'act_init_7',
+          category: 'points',
+          type: 'points',
+          text: '⭐ Aman earned Clean Code Review Bounty (+35 pts)',
+          contestantName: 'Aman',
+          team: 'Beta',
+          delta: 35,
+          timestamp: Date.now() - 15000,
+          time: '15s ago'
+        },
+        {
+          id: 'act_init_8',
+          category: 'decree',
+          type: 'meme',
+          text: '🗿 Big Boss Meme: "Silence in the house! Mewing streak maintained."',
+          contestantName: '',
+          team: '',
+          delta: 0,
+          timestamp: Date.now() - 5000,
+          time: 'Just now'
+        }
       ],
       settings: {
         soundMuted: false,
@@ -253,6 +338,41 @@
   };
 
   /**
+   * Central Real-Time Activity Logger
+   */
+  window.logActivity = function (entry) {
+    if (!window.AppState) return;
+    if (!window.AppState.activityLog) window.AppState.activityLog = [];
+
+    const now = Date.now();
+    const timeFormatted = new Date(now).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+    const item = {
+      id: entry.id || ('act_' + now + '_' + Math.random().toString(36).substr(2, 4)),
+      category: entry.category || 'general',
+      type: entry.type || 'info',
+      text: entry.text || '',
+      contestantName: entry.contestantName || '',
+      team: entry.team || '',
+      delta: entry.delta || 0,
+      timestamp: entry.timestamp || now,
+      time: entry.time || timeFormatted
+    };
+
+    window.AppState.activityLog.unshift(item);
+    if (window.AppState.activityLog.length > 100) {
+      window.AppState.activityLog.pop();
+    }
+
+    saveState();
+
+    if (window.renderActivityLogUI) {
+      window.renderActivityLogUI();
+    }
+    return item;
+  };
+
+  /**
    * Central Reactive Event Dispatcher
    */
   window.dispatchStateChange = function (eventType, payload) {
@@ -267,10 +387,10 @@
           timestamp: Date.now(),
           type: payload.type || 'info'
         });
-        window.AppState.activityLog.unshift({
-          id: 'act_' + Date.now(),
-          text: `📢 Decree: "${payload.text.substring(0, 42)}..."`,
-          time: 'Just now'
+        window.logActivity({
+          category: 'decree',
+          type: 'decree',
+          text: `📢 Big Boss Decree: "${payload.text.substring(0, 52)}..."`
         });
         break;
 
@@ -278,10 +398,13 @@
         const target = window.AppState.contestants.find(c => c.id === payload.contestantId);
         if (target) {
           target.points = Math.max(0, target.points + payload.delta);
-          window.AppState.activityLog.unshift({
-            id: 'act_' + Date.now(),
-            text: `${target.name} ${payload.delta >= 0 ? '+' : ''}${payload.delta} pts (${payload.reason || 'Manual'})`,
-            time: 'Just now'
+          window.logActivity({
+            category: 'points',
+            type: 'points',
+            text: `${target.name} ${payload.delta >= 0 ? '+' : ''}${payload.delta} pts (${payload.reason || 'Manual Adjustment'})`,
+            contestantName: target.name,
+            team: target.team,
+            delta: payload.delta
           });
         }
         break;
@@ -295,10 +418,12 @@
         });
         window.AppState.captainId = payload.contestantId;
         const newCap = window.AppState.contestants.find(c => c.id === payload.contestantId);
-        window.AppState.activityLog.unshift({
-          id: 'act_' + Date.now(),
+        window.logActivity({
+          category: 'captain',
+          type: 'captain',
           text: `👑 ${newCap ? newCap.name : 'Contestant'} appointed House Captain!`,
-          time: 'Just now'
+          contestantName: newCap ? newCap.name : '',
+          team: newCap ? newCap.team : ''
         });
         break;
 
@@ -307,9 +432,23 @@
         if (imm) {
           if (imm.status === 'immune') {
             imm.status = 'active';
+            window.logActivity({
+              category: 'captain',
+              type: 'shield',
+              text: `🛡️ ${imm.name} Immunity Shield REVOKED`,
+              contestantName: imm.name,
+              team: imm.team
+            });
           } else {
             imm.status = 'immune';
             window.AppState.nominees = window.AppState.nominees.filter(id => id !== payload.contestantId);
+            window.logActivity({
+              category: 'captain',
+              type: 'shield',
+              text: `🛡️ ${imm.name} Immunity Shield ACTIVATED`,
+              contestantName: imm.name,
+              team: imm.team
+            });
           }
         }
         break;
@@ -322,10 +461,12 @@
             window.AppState.nominees.push(payload.contestantId);
           }
           window.AppState.dramaLevel = Math.min(100, window.AppState.dramaLevel + 10);
-          window.AppState.activityLog.unshift({
-            id: 'act_' + Date.now(),
-            text: `⚠️ ${nom.name} nominated for Eviction!`,
-            time: 'Just now'
+          window.logActivity({
+            category: 'danger',
+            type: 'nomination',
+            text: `⚠️ ${nom.name} nominated for Eviction in Danger Zone!`,
+            contestantName: nom.name,
+            team: nom.team
           });
         }
         break;
@@ -340,10 +481,12 @@
           window.AppState.contestants.splice(eIdx, 1);
           window.AppState.nominees = window.AppState.nominees.filter(id => id !== payload.contestantId);
           window.AppState.dramaLevel = Math.min(100, window.AppState.dramaLevel + 15);
-          window.AppState.activityLog.unshift({
-            id: 'act_' + Date.now(),
-            text: `☠️ ${evicted.name} EVICTED from the Tech House!`,
-            time: 'Just now'
+          window.logActivity({
+            category: 'eviction',
+            type: 'eviction',
+            text: `☠️ ${evicted.name} PERMANENTLY EVICTED from the Tech House!`,
+            contestantName: evicted.name,
+            team: evicted.team
           });
         }
         break;
@@ -357,10 +500,13 @@
           if (earner) {
             earner.points += task.points;
             earner.tasksCompleted = (earner.tasksCompleted || 0) + 1;
-            window.AppState.activityLog.unshift({
-              id: 'act_' + Date.now(),
+            window.logActivity({
+              category: 'task',
+              type: 'task',
               text: `✅ ${earner.name} completed "${task.title}" (+${task.points} pts)`,
-              time: 'Just now'
+              contestantName: earner.name,
+              team: earner.team,
+              delta: task.points
             });
           }
         }
@@ -369,16 +515,23 @@
       case 'CONTESTANT_ADD':
         if (payload.contestant) {
           window.AppState.contestants.push(payload.contestant);
-          window.AppState.activityLog.unshift({
-            id: 'act_' + Date.now(),
-            text: `👤 New housemate ${payload.contestant.name} registered (Team ${payload.contestant.team})`,
-            time: 'Just now'
+          window.logActivity({
+            category: 'contestant',
+            type: 'registration',
+            text: `👤 Housemate ${payload.contestant.name} registered into Team ${payload.contestant.team}!`,
+            contestantName: payload.contestant.name,
+            team: payload.contestant.team
           });
         }
         break;
 
       case 'DRAMA_SPIKE':
-        window.AppState.dramaLevel = Math.min(100, Math.max(0, payload.level));
+        window.AppState.dramaLevel = Math.min(100, (window.AppState.dramaLevel || 50) + (payload.amount || 10));
+        window.logActivity({
+          category: 'drama',
+          type: 'drama',
+          text: `🔥 House Drama spiked to ${window.AppState.dramaLevel}% (+${payload.amount || 10}%)!`
+        });
         break;
 
       case 'RESET_ALL':

@@ -184,16 +184,24 @@
 
   // ---- ACTIVITY LOG ----
   function logActivity(text) {
-    const state = window.AppState;
-    if (!state) return;
-    if (!state.activityLog) state.activityLog = [];
-
-    state.activityLog.unshift({
-      id: 'act_' + Date.now(),
-      text: text,
-      badge: 'SANDBOX',
-      timestamp: Date.now()
-    });
+    if (window.logActivity) {
+      window.logActivity({
+        category: 'drama',
+        type: 'sandbox',
+        text: text,
+        timestamp: Date.now()
+      });
+    } else {
+      const state = window.AppState;
+      if (!state) return;
+      if (!state.activityLog) state.activityLog = [];
+      state.activityLog.unshift({
+        id: 'act_' + Date.now(),
+        text: text,
+        category: 'drama',
+        timestamp: Date.now()
+      });
+    }
   }
 
   // ---- INIT ----

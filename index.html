@@ -67,6 +67,7 @@
         <a href="#triage-sandbox" style="color: var(--ink-700); text-decoration: none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Live Sandbox</a>
         <a href="#view-contestants" style="color: var(--ink-700); text-decoration: none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Contestants</a>
         <a href="#view-danger-zone" style="color: var(--ink-700); text-decoration: none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Danger Zone</a>
+        <a href="#view-activity-log" onclick="document.querySelector('[data-target-view=view-activity-log]')?.click()" style="color: var(--accent-pink); text-decoration: none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">📜 Activity Log</a>
       </nav>
 
       <!-- Right Action Pill Buttons -->
@@ -395,6 +396,10 @@
           <button class="nav-tab-btn" data-target-view="view-evicted">
             <i class="fa-solid fa-skull"></i> Hall of Shame
           </button>
+          <button class="nav-tab-btn" data-target-view="view-activity-log">
+            <i class="fa-solid fa-clock-rotate-left" style="color: var(--accent-pink);"></i> Live Activity Log
+            <span class="pill-badge" style="background: var(--accent-lime); font-size: 0.6rem; padding: 1px 6px; margin-left: auto;">LIVE</span>
+          </button>
         </nav>
       </div>
 
@@ -689,6 +694,73 @@
         <!-- Aman's Frozen Container ID -->
         <div id="evicted-graveyard" class="hall-of-shame-grid"></div>
       </div>
+
+      <!-- VIEW 6: Real-Time Activity Log & Audit Trail Console -->
+      <div class="view-section" id="view-activity-log">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1.25rem;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+              <h2 style="font-family: var(--font-serif); font-size: 1.6rem; font-weight: 900;">📜 Real-Time House Activity Log</h2>
+              <span class="pill-badge" style="background: var(--accent-lime); font-size: 0.65rem; font-weight: 800; display: inline-flex; align-items: center; gap: 4px;">
+                <span class="rec-pulse-dot" style="width: 7px; height: 7px; background: #000;"></span> LIVE AUDIT STREAM
+              </span>
+            </div>
+            <p style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-500); margin-top: 0.2rem;">
+              Deterministic event loop telemetry • Live immutable audit trail of all nominations, points, bounties, and decrees.
+            </p>
+          </div>
+
+          <div style="display: flex; gap: 0.45rem; align-items: center; flex-wrap: wrap;">
+            <button class="btn-brutalist btn-mini btn-lime" onclick="window.injectSimulatedLiveEvent()" title="Inject a random simulated real-time event for demonstration">
+              <i class="fa-solid fa-bolt"></i> ⚡ Inject Live Event
+            </button>
+            <button class="btn-brutalist btn-mini btn-yellow" onclick="window.exportActivityLogJSON()" title="Export activity log to JSON">
+              <i class="fa-solid fa-download"></i> Export JSON
+            </button>
+            <button class="btn-brutalist btn-mini" style="background: var(--bg-paper-alt);" onclick="window.clearActivityLog()" title="Clear activity log history">
+              <i class="fa-solid fa-trash-can"></i> Clear
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter & Search Console -->
+        <div class="brutalist-card" style="background: var(--bg-card); padding: 1rem; margin-bottom: 1.25rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+            <!-- Category Filter Pills -->
+            <div class="activity-filter-bar" id="activity-filter-buttons" style="display: flex; gap: 0.35rem; flex-wrap: wrap;">
+              <button class="btn-brutalist btn-mini active" data-filter="all" onclick="window.setActivityFilter('all')">
+                ALL <span id="count-filter-all">(0)</span>
+              </button>
+              <button class="btn-brutalist btn-mini" data-filter="drama" onclick="window.setActivityFilter('drama')">
+                ⚔️ Drama <span id="count-filter-drama">(0)</span>
+              </button>
+              <button class="btn-brutalist btn-mini" data-filter="points" onclick="window.setActivityFilter('points')">
+                ⭐ Points <span id="count-filter-points">(0)</span>
+              </button>
+              <button class="btn-brutalist btn-mini" data-filter="task" onclick="window.setActivityFilter('task')">
+                🏆 Tasks <span id="count-filter-task">(0)</span>
+              </button>
+              <button class="btn-brutalist btn-mini" data-filter="danger" onclick="window.setActivityFilter('danger')">
+                ⚠️ Danger <span id="count-filter-danger">(0)</span>
+              </button>
+              <button class="btn-brutalist btn-mini" data-filter="eviction" onclick="window.setActivityFilter('eviction')">
+                ☠️ Evictions <span id="count-filter-eviction">(0)</span>
+              </button>
+              <button class="btn-brutalist btn-mini" data-filter="decree" onclick="window.setActivityFilter('decree')">
+                📢 Decrees <span id="count-filter-decree">(0)</span>
+              </button>
+            </div>
+
+            <!-- Search input -->
+            <div style="flex: 1; min-width: 220px; max-width: 340px;">
+              <input type="text" id="activity-search-input" placeholder="🔍 Search events, housemates..." oninput="window.filterActivitySearch(this.value)" style="width: 100%; padding: 0.45rem 0.85rem; border: var(--border-thick); border-radius: var(--radius-pill); font-family: var(--font-mono); font-size: 0.75rem; outline: none; background: #fff;">
+            </div>
+          </div>
+        </div>
+
+        <!-- Full Activity Stream List Container -->
+        <div id="activity-stream-full" style="display: flex; flex-direction: column; gap: 0.65rem;"></div>
+      </div>
     </section>
 
     <!-- ==================== RIGHT COLUMN: LEADERBOARD, TIMER & STATS ==================== -->
@@ -787,6 +859,7 @@
   <script src="js/tasks.js"></script>
   <script src="js/stats.js"></script>
   <script src="js/genZ.js"></script>
+  <script src="js/activityLog.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

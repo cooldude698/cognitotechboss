@@ -609,3 +609,41 @@
     font-size: 36px;
   }
 }
+
+/* ============================================
+   REAL-TIME ACTIVITY LOG & AUDIT STREAM STYLES
+   ============================================ */
+.activity-log-card {
+  background: #ffffff;
+  border: 2px solid var(--ink-900);
+  border-radius: var(--radius-md);
+  box-shadow: 3px 3px 0px var(--ink-900);
+  padding: 0.95rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  animation: slide-in-activity 0.28s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+}
+
+.activity-log-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0px var(--ink-900);
+}
+
+@keyframes slide-in-activity {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.activity-filter-bar button.active {
+  background: var(--accent-yellow) !important;
+  box-shadow: 2px 2px 0px var(--ink-900) !important;
+}

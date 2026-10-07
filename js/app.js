@@ -47,16 +47,9 @@
   }
 
   function updateActivityLogUI() {
-    const feedContainer = document.getElementById('activity-feed-list');
-    if (!feedContainer || !window.AppState) return;
-
-    const logs = window.AppState.activityLog || [];
-    feedContainer.innerHTML = logs.slice(0, 7).map(item => `
-      <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.4rem 0; border-bottom: 1px dashed var(--ink-300); font-family: var(--font-mono); font-size: 0.75rem;">
-        <span style="font-weight: 700; color: var(--ink-900);">${item.text}</span>
-        <span style="color: var(--ink-500); font-size: 0.7rem; white-space: nowrap;">${item.time}</span>
-      </div>
-    `).join('');
+    if (window.renderActivityLogUI) {
+      window.renderActivityLogUI();
+    }
   }
 
   function initGlobalListeners() {
