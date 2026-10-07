@@ -39,6 +39,9 @@
           <button class="btn-brutalist btn-mini btn-danger" onclick="window.dispatchStateChange('POINTS_ADJUST', { contestantId: '${c.id}', delta: -25, reason: 'House Penalty' }); window.triggerFloatingPoints(this, -25); window.playSfx('beep');">
             -25
           </button>
+          <button class="btn-brutalist btn-mini" title="Custom Points & Reason" onclick="window.promptCustomPoints('${c.id}')">
+            +/-
+          </button>
           <button class="btn-brutalist btn-mini ${c.isCaptain ? 'btn-yellow' : ''}" title="Assign House Captain" onclick="window.dispatchStateChange('CAPTAIN_ASSIGN', { contestantId: '${c.id}' }); window.playSfx('airhorn'); window.triggerConfetti();">
             👑
           </button>
@@ -100,6 +103,56 @@
       </div>
     `).join('');
   }
+
+  /**
+   * Register a new housemate dynamically
+   */
+  window.promptAddContestant = function () {
+    const name = prompt("Enter new contestant name:");
+    if (!name || !name.trim()) return;
+    const team = prompt("Enter team (Alpha / Beta / Omega):", "Alpha") || "Alpha";
+    const avatars = ["🦁", "⚡", "🚀", "✨", "🎯", "🔥", "🐺", "💎", "👾", "👑", "🦊", "🐉"];
+    const avatar = prompt("Enter an emoji avatar:", avatars[Math.floor(Math.random() * avatars.length)]) || "👤";
+    const pointsStr = prompt("Enter starting points (default 200):", "200");
+    const points = parseInt(pointsStr, 10) || 200;
+
+    const newContestant = {
+      id: "c_" + Date.now().toString(36),
+      name: name.trim(),
+      team: team.trim(),
+      points: points,
+      status: "active",
+      isCaptain: false,
+      avatar: avatar,
+      vibe: "Slay 💅",
+      slayStreak: 0,
+      isSus: false,
+      tasksCompleted: 0
+    };
+
+    if (window.dispatchStateChange) {
+      window.dispatchStateChange("CONTESTANT_ADD", { contestant: newContestant });
+      if (window.playSfx) window.playSfx("beep");
+    }
+  };
+
+  /**
+   * Adjust custom points with audit justification
+   */
+  window.promptCustomPoints = function (contestantId) {
+    const c = (window.AppState && window.AppState.contestants || []).find(item => item.id === contestantId);
+    if (!c) return;
+    const deltaStr = prompt(`Enter points delta for ${c.name} (e.g. +30 or -20):`, "+25");
+    if (!deltaStr) return;
+    const delta = parseInt(deltaStr, 10);
+    if (isNaN(delta) || delta === 0) return;
+    const reason = prompt("Enter reason for point adjustment:", delta > 0 ? "Outstanding Task Execution" : "House Rule Infraction") || "Manual Adjustment";
+
+    if (window.dispatchStateChange) {
+      window.dispatchStateChange("POINTS_ADJUST", { contestantId, delta, reason });
+      if (window.playSfx) window.playSfx("beep");
+    }
+  };
 
   // Reactive updates
   window.addEventListener('app:state-changed', () => {

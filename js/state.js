@@ -366,6 +366,17 @@
         }
         break;
 
+      case 'CONTESTANT_ADD':
+        if (payload.contestant) {
+          window.AppState.contestants.push(payload.contestant);
+          window.AppState.activityLog.unshift({
+            id: 'act_' + Date.now(),
+            text: `👤 New housemate ${payload.contestant.name} registered (Team ${payload.contestant.team})`,
+            time: 'Just now'
+          });
+        }
+        break;
+
       case 'DRAMA_SPIKE':
         window.AppState.dramaLevel = Math.min(100, Math.max(0, payload.level));
         break;
