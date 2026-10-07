@@ -47,6 +47,10 @@ Every requirement from the official checklist is fully implemented, reactive, an
 5. **🧪 Interactive Drama Sandbox:** 1-Click simulated events (*Trigger Drama Spike, Slay Streak Boost, Skill Issue Penalty*) for instant game master interventions.
 6. **💥 Thanos Snap & Screen Shake VFX:** Procedural CSS disintegration keyframes and earthquake screen shake on evictions.
 7. **💾 LocalStorage State Persistence:** Page refresh retains all scores, nominations, and captaincy.
+8. **🔐 Role-Based Access Control (RBAC Engine):** 3 distinct operational roles:
+   - **👑 Big Boss (Super-Admin):** Full master authority (Evictions, Decrees, Captaincy, Point Overrides, Master Reset).
+   - **🎬 Show Producer (Director):** Operational controls (Task Management, Countdown Timer, Nominations, Points).
+   - **👁️ Audience / Spectator (Viewer):** Read-only telemetry with interactive live Fan Voting (`❤️ +10 pts`).
 
 ---
 
@@ -136,6 +140,7 @@ cognitotechboss/
     ├── stats.js                # Live house metrics & Chart.js points bar chart
     ├── genZ.js                 # Interactive triage sandbox & live drama simulator
     ├── activityLog.js          # Real-time activity log & audit stream, filtering, search & JSON export
+    ├── rbac.js                 # Role-Based Access Control engine (Big Boss, Producer, Spectator & live fan voting)
     └── app.js                  # Master app initializer, tab navigation, global listeners
 ```
 

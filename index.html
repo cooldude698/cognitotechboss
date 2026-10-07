@@ -70,8 +70,27 @@
         <a href="#view-activity-log" onclick="document.querySelector('[data-target-view=view-activity-log]')?.click()" style="color: var(--accent-pink); text-decoration: none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">📜 Activity Log</a>
       </nav>
 
+      <!-- Role-Based Access Control Switcher -->
+      <div class="role-selector-bar" style="display: flex; align-items: center; gap: 0.35rem; background: #fff; padding: 3px 6px; border: 2px solid var(--ink-900); border-radius: 9999px; box-shadow: 2px 2px 0px var(--ink-900);">
+        <span style="font-family: var(--font-mono); font-size: 0.65rem; font-weight: 900; color: var(--ink-700); padding: 0 4px;">
+          <i class="fa-solid fa-user-shield"></i> ROLE:
+        </span>
+        <button class="btn-brutalist btn-mini role-switcher-btn active" data-role="admin" onclick="window.setUserRole('admin')" style="font-size: 0.65rem; padding: 2px 8px; border-radius: 9999px;">
+          👑 Big Boss
+        </button>
+        <button class="btn-brutalist btn-mini role-switcher-btn" data-role="producer" onclick="window.setUserRole('producer')" style="font-size: 0.65rem; padding: 2px 8px; border-radius: 9999px;">
+          🎬 Producer
+        </button>
+        <button class="btn-brutalist btn-mini role-switcher-btn" data-role="audience" onclick="window.setUserRole('audience')" style="font-size: 0.65rem; padding: 2px 8px; border-radius: 9999px;">
+          👁️ Spectator
+        </button>
+      </div>
+
       <!-- Right Action Pill Buttons -->
       <div class="header-actions">
+        <span class="pill-badge" id="current-role-badge" style="background: var(--accent-yellow); font-weight: 900; font-size: 0.7rem; border: 2px solid var(--ink-900); padding: 4px 10px;">
+          👑 BIG BOSS
+        </span>
         <button class="btn-brutalist btn-lime" id="load-demo-state-btn" title="Populate rich 8-contestant demo state in 0.1s">
           <i class="fa-solid fa-bolt"></i> ⚡ LOAD DEMO STATE
         </button>
@@ -375,6 +394,20 @@
 
     <!-- ==================== LEFT COLUMN: NAV & DRAMA GAUGE ==================== -->
     <aside class="hud-col-left">
+      <!-- Role-Based Access Control HUD Card -->
+      <div class="brutalist-card" style="margin-bottom: 1rem; padding: 0.85rem;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.45rem;">
+          <span style="font-family: var(--font-mono); font-size: 0.72rem; font-weight: 800; color: var(--ink-700);">
+            <i class="fa-solid fa-id-badge"></i> ROLE PERMISSIONS
+          </span>
+          <button class="btn-brutalist btn-mini" onclick="window.showRbacMatrixModal()" style="font-size: 0.65rem; padding: 2px 6px;">
+            RBAC Matrix ℹ️
+          </button>
+        </div>
+        <div id="role-permission-banner" class="brutalist-card" style="padding: 0.65rem; background: #FEF9C3; border: 2px solid var(--ink-900); border-radius: var(--radius-md);">
+        </div>
+      </div>
+
       <!-- Nav Tabs -->
       <div class="brutalist-card">
         <span class="sticky-tag rotate-left lavender" style="margin-bottom: 0.85rem;">
@@ -860,6 +893,7 @@
   <script src="js/stats.js"></script>
   <script src="js/genZ.js"></script>
   <script src="js/activityLog.js"></script>
+  <script src="js/rbac.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

@@ -293,6 +293,27 @@
           time: 'Just now'
         }
       ],
+      currentUserRole: 'admin', // 'admin' (Big Boss) | 'producer' (Control Room) | 'audience' (Spectator)
+      roles: {
+        admin: {
+          name: 'Big Boss',
+          label: '👑 BIG BOSS',
+          description: 'Super-Administrator with absolute house authority.',
+          permissions: ['evict', 'nominate', 'immunity', 'points', 'captain', 'broadcast', 'tasks', 'timer', 'reset', 'vote']
+        },
+        producer: {
+          name: 'Show Producer',
+          label: '🎬 PRODUCER',
+          description: 'Control Room Director managing tasks, timers & nominations.',
+          permissions: ['nominate', 'immunity', 'points', 'tasks', 'timer', 'vote']
+        },
+        audience: {
+          name: 'Audience / Spectator',
+          label: '👁️ SPECTATOR',
+          description: 'Public viewer with read-only telemetry and live voting privileges.',
+          permissions: ['vote']
+        }
+      },
       settings: {
         soundMuted: false,
         darkMode: false
@@ -335,6 +356,53 @@
       detail: { eventType: 'DEMO_STATE_LOADED', payload: null, state: window.AppState }
     }));
     console.log('⚡ Big Boss Demo State Successfully Loaded in 0.1s!');
+  };
+
+  /**
+   * RBAC Helper: Check if active user role possesses a specific permission
+   */
+  window.hasPermission = function (perm) {
+    if (!window.AppState) return true;
+    const currentRole = window.AppState.currentUserRole || 'admin';
+    const roleConfig = window.AppState.roles && window.AppState.roles[currentRole];
+    if (!roleConfig) return true;
+    return roleConfig.permissions.includes(perm);
+  };
+
+  /**
+   * RBAC Switcher: Change user persona ('admin' | 'producer' | 'audience')
+   */
+  window.setUserRole = function (role) {
+    if (!window.AppState) return;
+    if (!['admin', 'producer', 'audience'].includes(role)) return;
+
+    window.AppState.currentUserRole = role;
+    saveState();
+
+    const roleLabels = {
+      admin: '👑 BIG BOSS (Super-Admin)',
+      producer: '🎬 SHOW PRODUCER (Control Room)',
+      audience: '👁️ AUDIENCE (Spectator Mode)'
+    };
+
+    if (window.logActivity) {
+      window.logActivity({
+        category: 'decree',
+        type: 'role',
+        text: `🔐 Access Role switched to ${roleLabels[role]}!`
+      });
+    }
+
+    if (window.playSfx) window.playSfx('beep');
+
+    // Broadcast standard state changed event
+    window.dispatchEvent(new CustomEvent('app:state-changed', {
+      detail: { eventType: 'ROLE_CHANGED', payload: { role }, state: window.AppState }
+    }));
+
+    if (window.applyRoleAccessControl) {
+      window.applyRoleAccessControl();
+    }
   };
 
   /**

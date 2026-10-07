@@ -32,26 +32,34 @@
           </div>
         </div>
 
-        <div class="contestant-actions-row">
-          <button class="btn-brutalist btn-mini btn-lime" onclick="window.dispatchStateChange('POINTS_ADJUST', { contestantId: '${c.id}', delta: 50, reason: 'Task Bounty' }); window.triggerFloatingPoints(this, 50); window.playSfx('beep');">
-            +50
-          </button>
-          <button class="btn-brutalist btn-mini btn-danger" onclick="window.dispatchStateChange('POINTS_ADJUST', { contestantId: '${c.id}', delta: -25, reason: 'House Penalty' }); window.triggerFloatingPoints(this, -25); window.playSfx('beep');">
-            -25
-          </button>
-          <button class="btn-brutalist btn-mini" title="Custom Points & Reason" onclick="window.promptCustomPoints('${c.id}')">
-            +/-
-          </button>
-          <button class="btn-brutalist btn-mini ${c.isCaptain ? 'btn-yellow' : ''}" title="Assign House Captain" onclick="window.dispatchStateChange('CAPTAIN_ASSIGN', { contestantId: '${c.id}' }); window.playSfx('airhorn'); window.triggerConfetti();">
-            👑
-          </button>
-          <button class="btn-brutalist btn-mini" title="Toggle Immunity" onclick="window.dispatchStateChange('IMMUNITY_TOGGLE', { contestantId: '${c.id}' }); window.playSfx('beep');">
-            🛡️
-          </button>
-          <button class="btn-brutalist btn-mini btn-danger" ${c.status === 'immune' || c.isCaptain ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''} title="${c.status === 'immune' || c.isCaptain ? 'Immune from nomination' : 'Nominate for Eviction'}" onclick="window.dispatchStateChange('NOMINATE_CONTESTANT', { contestantId: '${c.id}' }); window.playSfx('alarm');">
-            ⚠️
-          </button>
-        </div>
+        ${(window.AppState?.currentUserRole === 'audience') ? `
+          <div class="contestant-actions-row">
+            <button class="btn-brutalist btn-mini" style="flex: 1; font-weight: 800; background: var(--accent-pink); color: #fff; padding: 0.5rem;" onclick="window.castAudienceVote('${c.id}')">
+              <i class="fa-solid fa-heart"></i> Fan Vote (+10 pts)
+            </button>
+          </div>
+        ` : `
+          <div class="contestant-actions-row">
+            <button class="btn-brutalist btn-mini btn-lime" onclick="window.dispatchStateChange('POINTS_ADJUST', { contestantId: '${c.id}', delta: 50, reason: 'Task Bounty' }); window.triggerFloatingPoints(this, 50); window.playSfx('beep');">
+              +50
+            </button>
+            <button class="btn-brutalist btn-mini btn-danger" onclick="window.dispatchStateChange('POINTS_ADJUST', { contestantId: '${c.id}', delta: -25, reason: 'House Penalty' }); window.triggerFloatingPoints(this, -25); window.playSfx('beep');">
+              -25
+            </button>
+            <button class="btn-brutalist btn-mini" title="Custom Points & Reason" onclick="window.promptCustomPoints('${c.id}')">
+              +/-
+            </button>
+            <button class="btn-brutalist btn-mini ${c.isCaptain ? 'btn-yellow' : ''}" title="Assign House Captain" onclick="window.dispatchStateChange('CAPTAIN_ASSIGN', { contestantId: '${c.id}' }); window.playSfx('airhorn'); window.triggerConfetti();">
+              👑
+            </button>
+            <button class="btn-brutalist btn-mini" title="Toggle Immunity" onclick="window.dispatchStateChange('IMMUNITY_TOGGLE', { contestantId: '${c.id}' }); window.playSfx('beep');">
+              🛡️
+            </button>
+            <button class="btn-brutalist btn-mini btn-danger" ${c.status === 'immune' || c.isCaptain ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''} title="${c.status === 'immune' || c.isCaptain ? 'Immune from nomination' : 'Nominate for Eviction'}" onclick="window.dispatchStateChange('NOMINATE_CONTESTANT', { contestantId: '${c.id}' }); window.playSfx('alarm');">
+              ⚠️
+            </button>
+          </div>
+        `}
       </div>
     `).join('');
   }
@@ -62,6 +70,8 @@
     if (!dangerZone || !window.AppState) return;
 
     const nominees = window.AppState.contestants.filter(c => c.status === 'nominated');
+    const currentRole = window.AppState.currentUserRole || 'admin';
+    const canEvict = (currentRole === 'admin');
 
     if (dangerCountEl) {
       dangerCountEl.textContent = `${nominees.length} IN DANGER`;
@@ -93,12 +103,18 @@
         </div>
 
         <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
-          <button class="btn-brutalist btn-mini btn-danger" style="flex: 1;" onclick="window.evictContestant('${c.id}')">
-            <i class="fa-solid fa-skull"></i> EVICT NOW
+          <button class="btn-brutalist btn-mini btn-danger" style="flex: 1; ${!canEvict ? 'opacity: 0.5; cursor: not-allowed;' : ''}" ${!canEvict ? 'disabled title="🔒 Eviction restricted to Big Boss Super-Admin"' : ''} onclick="window.evictContestant('${c.id}')">
+            <i class="fa-solid fa-skull"></i> ${canEvict ? 'EVICT NOW' : '🔒 Evict (Big Boss Only)'}
           </button>
-          <button class="btn-brutalist btn-mini" title="Save / Revoke Nomination" onclick="window.dispatchStateChange('IMMUNITY_TOGGLE', { contestantId: '${c.id}' }); window.playSfx('beep');">
-            🛡️ Save
-          </button>
+          ${currentRole !== 'audience' ? `
+            <button class="btn-brutalist btn-mini" title="Save / Revoke Nomination" onclick="window.dispatchStateChange('IMMUNITY_TOGGLE', { contestantId: '${c.id}' }); window.playSfx('beep');">
+              🛡️ Save
+            </button>
+          ` : `
+            <button class="btn-brutalist btn-mini" style="background: var(--accent-pink); color: #fff;" onclick="window.castAudienceVote('${c.id}')">
+              ❤️ Vote (+10)
+            </button>
+          `}
         </div>
       </div>
     `).join('');
